@@ -12,3 +12,11 @@ generatorConfig.xml
 *.lock
 .settings
 .gitignore
+yuansheng-firuits-mall-admin/src/test/
+yuansheng-firuits-mall-admin/target/
+yuansheng-firuits-mall-api/src/test/
+yuansheng-firuits-mall-api/target/
+yuansheng-firuits-mall-common/src/test/
+yuansheng-firuits-mall-common/target/
+yuansheng-firuits-mall-shop/src/test/
+yuansheng-firuits-mall-shop/target/
