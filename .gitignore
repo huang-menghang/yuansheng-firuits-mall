@@ -13,6 +13,7 @@ generatorConfig.xml
 .settings
 .gitignore
 .springBeans
+.externalToolBuilders
 yuansheng-firuits-mall-admin/src/test/
 yuansheng-firuits-mall-admin/target/
 yuansheng-firuits-mall-api/src/test/
