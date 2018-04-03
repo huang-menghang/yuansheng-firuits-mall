@@ -286,6 +286,11 @@
 			<artifactId>fluent-validator</artifactId>
 			<version>${fluent-validator.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.1.0.Final</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
