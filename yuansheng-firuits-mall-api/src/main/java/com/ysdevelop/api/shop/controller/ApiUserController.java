@@ -38,8 +38,10 @@ public class ApiUserController {
 	}
 	
 	@RequestMapping(value="/register",method =  RequestMethod.POST )
-	public String register(@Valid Member member){
-		return null;
+	@ResponseBody
+	public Result<String> register(@Valid Member member,String confirmPassword){
+		System.out.println(member);
+		return Result.success("测试成功");
 	}
 
 }

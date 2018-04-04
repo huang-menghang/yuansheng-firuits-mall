@@ -1,6 +1,12 @@
 package com.ysdevelop.api.entity;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.ysdevelop.common.entity.BaseEntity;
+import com.ysdevelop.common.validate.IsMobile;
+import com.ysdevelop.common.validate.IsTelephone;
 /**
  * 
  * @author OldHuang
@@ -15,17 +21,25 @@ import com.ysdevelop.common.entity.BaseEntity;
  *
  */
 public class Member extends BaseEntity{
-
+    @NotEmpty(message="手机号码不能为空")
+    @IsMobile
 	private String mobile;
-	
+    @NotEmpty(message="密码不能为空")
+    @Size(max=12,min=6)
 	private String password;
 	
     private String restaurant;
-    
+    @NotEmpty(message="姓名不能为空")    
+    @Size(min=2)
     private String name;
-    
+    @NotEmpty(message="电话号码不能为空")
+    @IsTelephone
     private String telephone;
-    
+    @NotEmpty(message="请选择省市")
+    private String province;
+    @NotEmpty(message="请选择省市")
+    private String city;
+    @NotEmpty(message="详细地址不能为空")
     private String detailAddress;
 
 	public String getMobile() {
@@ -68,6 +82,22 @@ public class Member extends BaseEntity{
 		this.telephone = telephone;
 	}
 
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+	
 	public String getDetailAddress() {
 		return detailAddress;
 	}
@@ -75,10 +105,15 @@ public class Member extends BaseEntity{
 	public void setDetailAddress(String detailAddress) {
 		this.detailAddress = detailAddress;
 	}
+
+	@Override
+	public String toString() {
+		return "Member [mobile=" + mobile + ", password=" + password + ", restaurant=" + restaurant + ", name=" + name + ", telephone=" + telephone
+				+ ", province=" + province + ", city=" + city + ", detailAddress=" + detailAddress + "]";
+	}
     
     
 	
-	
-	
+
 	
 }

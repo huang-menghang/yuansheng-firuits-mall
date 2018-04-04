@@ -46,6 +46,14 @@ var common_ops = {
 		$('html, body').animate({
 			scrollTop : target.offset().top - 10
 		}, 100);
+	},
+	btnDisable : function(btn){
+		if(btn.hasClass('disabled')){
+			btn.attr("disabled",false).removeClass("disabled");
+		}else{
+			btn.attr("disabled",true).addClass("disabled");
+		}
 	}
+	
 
 }

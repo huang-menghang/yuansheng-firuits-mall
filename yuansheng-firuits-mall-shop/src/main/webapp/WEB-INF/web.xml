@@ -8,9 +8,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-        <!--  
-        classpath:spring-jdbc.xml 
-        -->
+        classpath:spring-mybaits.xml 
         classpath*:mall-*.xml
 		</param-value>
 	</context-param>

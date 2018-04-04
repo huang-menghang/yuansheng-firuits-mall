@@ -34,9 +34,11 @@
 	</script>
 	<jsp:include page="/context/js-tags.jsp"/>
 	<script type="text/javascript"
-		src="<%=basePath%>/static/js/plugin/jquery-validation/jquery.validate.min.js"></script>
+		src="<%=basePath%>static/js/plugin/jquery-validation/jquery.validate.min.js"></script>
 	<script type="text/javascript"
-		src="<%=basePath%>/static/js/plugin/jquery-validation/localization/messages_zh.min.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/static/js/user/login.js"></script>
+		src="<%=basePath%>static/js/plugin/jquery-validation/localization/messages_zh.min.js"></script>
+	<script type="text/javascript" 
+       src="<%=basePath%>static/js/plugin/jquery-validation/additional-methods.min.js"></script>	
+	<script type="text/javascript" src="<%=basePath%>static/js/user/login.js"></script>
 </body>
 </html>
