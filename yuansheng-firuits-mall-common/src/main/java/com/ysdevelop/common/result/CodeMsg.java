@@ -10,10 +10,15 @@ public class CodeMsg {
 
 	// 通用的错误码
 	public static CodeMsg SUCCESS = new CodeMsg(0, "success");
+	public static CodeMsg SERVER_ERROR = new CodeMsg(500100, "服务端异常");
+
 	// 用户
 	public static CodeMsg MOBILE_EMPTY = new CodeMsg(500001,"手机号码为空");
 	public static CodeMsg PASSWORD_EMPTY = new CodeMsg(500002,"密码为空");
 	public static CodeMsg PASSWORD_WRONG =  new CodeMsg(500003,"密码错误");
+	public static CodeMsg MOBILE_EXIST =  new CodeMsg(500004,"手机号码已经注册");
+	public static CodeMsg PASSWORD_CONFIRM =  new CodeMsg(500005,"两次密码输入不一致");
+
 	private CodeMsg(int code, String msg) {
 		this.code = code;
 		this.msg = msg;

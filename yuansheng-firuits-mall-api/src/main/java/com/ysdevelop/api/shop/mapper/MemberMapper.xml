@@ -6,4 +6,11 @@
    (`name`,`mobile`,`password`,`restaurant`,`telephone`,`province`,`city`,`detailAddress`,`createTime`)
    value(#{name},#{mobile},#{password},#{restaurant},#{telephone},#{province},#{city},#{detailAddress},now())
    </insert>
+   
+   <select id="countByMobile" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(`id`)
+    from `t_ys_firuits_mall_member`
+    where `mobile` = #{mobile}		
+   </select>
+   
 </mapper>

@@ -45,7 +45,15 @@ public class WebExceptionHandler {
 				model.put("msg", msg);
 				view.setAttributesMap(model);
 				mv.setView(view);
-			} else {
+			} 
+			else if(ex instanceof WebServiceException){
+				WebServiceException e = (WebServiceException)ex;
+				model.put("code", -1);
+				model.put("msg", e.getMessage());
+				view.setAttributesMap(model);
+				mv.setView(view);
+			}
+			else {
 				model.put("code", -1);
 				model.put("msg", "系统内部错误");
 				view.setAttributesMap(model);

@@ -55,13 +55,39 @@ var user_register_ops = {
 						city:$('#select-address').val()
 					},
 					success:function(res){
-						console.log(res);
+						if(res.code == 0){
+							common_ops.msg("注册成功");
+						}else{
+							common_ops.msg(res.msg);
+						}
+						common_ops.btnDisable($that);
 					},
 					error:function(res){
 				      common_ops.btnDisable($that);
 					}
 				});
 			}else{
+			      common_ops.btnDisable($that);
+			}
+		});
+		$(".checkCode").click(function(){
+			var $that = $(this);
+		    common_ops.btnDisable($that);
+			if (that.validateForm().form()) {
+			$.ajax({
+				url:"../user/getMobileMsg",
+				method:"post",
+				data:{mobile:$("#input-telephonephoneNo").val()},
+				type:"text/json",
+				success:function(res){
+					common_ops.btnDisable($that);
+				},
+				error:function(){
+					common_ops.btnDisable($that);
+				}
+			})
+			}
+			else{
 			      common_ops.btnDisable($that);
 			}
 		});

@@ -52,6 +52,8 @@
 		<commons-io.version>2.4</commons-io.version>
 		<commons-codec.version>1.9</commons-codec.version>
 		<commons-pool2.version>2.4.2</commons-pool2.version>
+		<httpclient.version>4.3.6</httpclient.version>
+		<httpcore.version>4.4.3</httpcore.version>
 	</properties>
 	<dependencies>
 
@@ -290,6 +292,17 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.1.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${httpclient.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>${httpcore.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
