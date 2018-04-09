@@ -35,10 +35,10 @@
 		<li><label class="lit">收货地址：</label> <input type="text"
 			id="input-detailAdd" required="true" placeholder="区-街道-小区-门牌号" class="textbox" /></li>
 		<li style="padding:0;"><a class="checkCode">获取手机校验码</a></li>
-		<li><label class="lit">校验码：</label><input type="text" required="true" diyCheck="请输入6位数字验证码" diyRule="^[0-9]{6}$" placeholder="六位校验码" class="textbox"/></li>
+		<li><label class="lit">校验码：</label><input type="text" diyCheck="请输入6位数字验证码" diyRule="^\s*$|^[0-9]{6}$" placeholder="六位校验码" class="textbox" id="check-code" /></li>
 		<li class="liLink"><a
 			href="<%=basePath%>userSet/userAgreement.jspa" class="fl">《用户协议》</a>
-			<a href="<%=basePath%>userSet/login.jspa" class="fr">已有账号，登陆</a></li>
+			<a href="<%=basePath%>member/login" class="fr">已有账号，登陆</a></li>
 		<li><input type="button" id="input-regesiter" value="立即注册" /></li>
 	</ul>
 	</form>
@@ -55,6 +55,6 @@
 		src="<%=basePath%>static/js/plugin/jquery-validation/localization/messages_zh.min.js"></script>
     <script type="text/javascript" 
        src="<%=basePath%>static/js/plugin/jquery-validation/additional-methods.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>static/js/user/register.js"></script>
+    <script type="text/javascript" src="<%=basePath%>static/js/member/register.js"></script>
 </body>
 </html>

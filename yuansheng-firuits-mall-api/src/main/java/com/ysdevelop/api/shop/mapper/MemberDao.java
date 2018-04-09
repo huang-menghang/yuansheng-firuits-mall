@@ -8,4 +8,6 @@ public interface MemberDao {
 	void save(Member member);
 	
 	int countByMobile(String mobile);
+	
+	Member getByMobile(String mobile);
 }

@@ -21,7 +21,7 @@
 			required="true" minlength="6" maxlength="12" value="" /></li>
 		<li class="liLink lg_liLink"><span><label><input
 					type="checkbox" />记住密码</label></span> <span><a
-				href="<%= basePath %>user/register">新用户注册</a></span> <span><a
+				href="<%= basePath %>member/register">新用户注册</a></span> <span><a
 				href="/userSet/findPwd.jspa">忘记密码?</a></span></li>
 		<li><input type="button" class="btn-login" value="立即登陆" /></li>
 	</ul>
@@ -38,7 +38,9 @@
 	<script type="text/javascript"
 		src="<%=basePath%>static/js/plugin/jquery-validation/localization/messages_zh.min.js"></script>
 	<script type="text/javascript" 
-       src="<%=basePath%>static/js/plugin/jquery-validation/additional-methods.min.js"></script>	
-	<script type="text/javascript" src="<%=basePath%>static/js/user/login.js"></script>
+       src="<%=basePath%>static/js/plugin/jquery-validation/additional-methods.min.js"></script>
+    <script type="text/javascript" 
+       src="<%=basePath%>static/js/plugin/md5/md5.min.js"></script>	
+	<script type="text/javascript" src="<%=basePath%>static/js/member/login.js"></script>
 </body>
 </html>

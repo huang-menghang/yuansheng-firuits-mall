@@ -13,4 +13,11 @@
     where `mobile` = #{mobile}		
    </select>
    
+   <select id="getByMobile" resultType="com.ysdevelop.api.entity.Member">
+    select 
+    `id`,`name`,`mobile`,`password`
+    from `t_ys_firuits_mall_member`
+    where `mobile` = #{mobile}
+   </select>
+   
 </mapper>

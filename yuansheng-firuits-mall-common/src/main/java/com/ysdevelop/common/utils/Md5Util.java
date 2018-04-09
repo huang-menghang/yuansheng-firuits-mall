@@ -16,14 +16,14 @@ public class Md5Util {
 		return md5(str);
 	}
 	
-	public static String formPassToDBPass(String formPass, String salt) {
+	public static String formPassToDBPass(String formPass) {
 		String str = ""+salt.charAt(0)+salt.charAt(2) + formPass +salt.charAt(5) + salt.charAt(4);
 		return md5(str);
 	}
 	
 	public static String inputPassToDbPass(String inputPass) {
 		String formPass = inputPassToFormPass(inputPass);
-		String dbPass = formPassToDBPass(formPass, salt);
+		String dbPass = formPassToDBPass(formPass);
 		return dbPass;
 	}
 	

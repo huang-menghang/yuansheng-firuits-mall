@@ -11,7 +11,7 @@ public class LoginVo {
 	@IsMobile
 	private String mobile;
 	@NotEmpty(message = "密码不能为空")
-	@Size(min = 6, max = 12, message = "密码长度必须在6到12之间")
+	@Size(min = 6, max = 64, message = "密码长度必须在6到64之间")
 	private String password;
 
 	public String getMobile() {

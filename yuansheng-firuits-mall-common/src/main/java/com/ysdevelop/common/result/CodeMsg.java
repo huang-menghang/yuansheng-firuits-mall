@@ -18,7 +18,9 @@ public class CodeMsg {
 	public static CodeMsg PASSWORD_WRONG =  new CodeMsg(500003,"密码错误");
 	public static CodeMsg MOBILE_EXIST =  new CodeMsg(500004,"手机号码已经注册");
 	public static CodeMsg PASSWORD_CONFIRM =  new CodeMsg(500005,"两次密码输入不一致");
-
+	public static CodeMsg MESSAGE_CODE_WRONG =  new CodeMsg(500006,"手机验证码错误");
+	public static CodeMsg MEMBER_WRONG =  new CodeMsg(500007,"手机号码不存在");
+	
 	private CodeMsg(int code, String msg) {
 		this.code = code;
 		this.msg = msg;

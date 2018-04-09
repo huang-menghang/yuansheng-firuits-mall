@@ -55,7 +55,7 @@ public class ResourceUtil {
      * @param name 参数名称
      * @return 参数名称对应值
      */
-    public static String getConfigByName(String name) {
+    public String getConfigByName(String name) {
         String value = "";
         try {
             value = new String(BUNDLE.getString(name).getBytes("iso8859-1"), "UTF-8");

@@ -75,6 +75,6 @@
 	
 
 	<welcome-file-list>
-		<welcome-file>webpage/user/login.jsp</welcome-file>
+		<welcome-file>webpage/member/login.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>	

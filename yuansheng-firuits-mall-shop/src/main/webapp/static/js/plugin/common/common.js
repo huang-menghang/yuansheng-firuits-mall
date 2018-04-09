@@ -1,3 +1,6 @@
+//salt
+var g_passsword_salt="1a2b3c4d";
+var basePath = $("input[name='basePath']").val();
 var common_ops = {
 	alert : function(msg, cb) {
 		layer.alert(msg, {
