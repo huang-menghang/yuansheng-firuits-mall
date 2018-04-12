@@ -1,9 +1,11 @@
 package com.ysdevelop.common.utils;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
@@ -176,6 +178,21 @@ public class HttpUtils {
 
 		return result;
 
+	}
+
+	/**
+	 * 重定向
+	 * 
+	 * @param httpServletRequest
+	 * @param httpServletResponse
+	 * @param url
+	 */
+	public static void redirectUrl(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, String url) {
+		try {
+			httpServletResponse.sendRedirect(url);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

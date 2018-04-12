@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysdevelop.api.shop.mapper.GoodsDao">
+
+	<select id="listByQuery" resultType="com.ysdevelop.api.entity.Goods" parameterType="java.lang.Integer">
+		select `id`,`name`,`discoutPrice`,`price`,`imagePath`,`discoutPrice`/`price` as `discount`
+		from `t_ys_firuits_goods`
+		order by 
+		<choose>
+				<when test="queryId == 0 ">sales desc,</when>
+				<when test="queryId == 1">launcTime desc,</when>
+		        <when test="queryId == 2">`discount` asc,</when>
+		</choose>
+		`sort` desc
+		limit 0,3
+	</select>
+	
+	<select id="getById" resultType="com.ysdevelop.api.entity.Goods">
+	  select
+	  `goods`.`id` as `id`,
+	  `goods`.`price` as `price`,
+	  `goods`.`discoutPrice` as `discoutPrice`,
+	  `goods`.`standrds` as `standrds`,
+	  `goods`.`weight` as `weight`,
+	  `goods`.`packet` as `packet`,
+	  `goods`.`imagePath` as `imagePath`,
+	  `goods`.`launcTime` as `launcTime`,
+	  `goods`.`storage` as `storage`,
+	  `brand`.`name` as `brandName`
+	  from `t_ys_firuits_goods` as `goods`
+	  left join `t_ys_firuits_brand` as `brand` on `goods`.`brandId` = `brand`.id
+	  where `goods`.id = #{id}
+	</select>
+
+
+</mapper>

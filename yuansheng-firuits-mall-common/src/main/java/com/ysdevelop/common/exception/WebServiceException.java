@@ -19,5 +19,7 @@ public class WebServiceException extends RuntimeException {
 	public CodeMsg getCm() {
 		return codeMsg;
 	}
+	
+
 
 }

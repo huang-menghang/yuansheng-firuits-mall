@@ -26,8 +26,19 @@ var member_login_ops = {
 						password:password
 					},
 					success:function(res){
-						common_ops.msg(res.msg);
-						$that.attr("disabled",false).removeClass("disabled");
+					    var	callback = null;
+						if(res.code == 0){
+						 callback = function(){
+							 var rurl = common_ops.g_getQueryString("rurl");
+							 if(rurl == null){
+								 rurl = "index";
+							 }
+							 window.location.href = rurl;
+						 };	
+						}else{
+							$that.attr("disabled",false).removeClass("disabled");
+						}
+						common_ops.msg(res.msg,callback);
 					}			
 				})
 				}else{
