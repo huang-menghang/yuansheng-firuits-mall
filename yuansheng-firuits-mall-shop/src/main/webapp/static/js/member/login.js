@@ -31,7 +31,7 @@ var member_login_ops = {
 						 callback = function(){
 							 var rurl = common_ops.g_getQueryString("rurl");
 							 if(rurl == null){
-								 rurl = "index";
+								 rurl = basePath+"index";
 							 }
 							 window.location.href = rurl;
 						 };	

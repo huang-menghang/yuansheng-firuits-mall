@@ -70,6 +70,7 @@ public class MemberServiceImpl implements MemberService {
 		// 随机生成uuid
 		String token = UUIDUtil.uuid();
 		addCookie(session, response, memberLogin, token);
+		loginVo.setId(memberLogin.getId());
 	}
 
 	private void addCookie(HttpSession session, HttpServletResponse response, Member member, String token) {

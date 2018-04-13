@@ -69,3 +69,27 @@ CREATE TABLE `t_ys_firuits_brand` (
   `updateTime` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_ys_firuits_cart`;
+CREATE TABLE `t_ys_firuits_cart` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '购物车id', 
+  `memberId` int(11) NOT NULL COMMENT '用户id',
+  `totalItemCount` int(3) NOT NULL COMMENT '总的条目数',
+  `totalItemNo` int(3) NOT NULL COMMENT '总的产品数',
+  `totalPrice` decimal(8,2) NOT NULL COMMENT '商品总价',
+  `createTime` timestamp NULL DEFAULT NULL COMMENT '创健日期',
+  `updateTime` timestamp NULL DEFAULT NULL COMMENT '修改日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_ys_firuits_cart_item`;
+CREATE TABLE `t_ys_firuits_cart_item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '购物车条目id', 
+  `cartId` int(11) NOT NULL COMMENT '用户id',
+  `goodsId` int(11) NULL COMMENT '商品id',
+  `goodsPrice` double(8,2)  NOT NULL COMMENT '商品价格',
+  `goodsCount` int(3) default 0 NOT NULL COMMENT '商品数目',
+  `createTime` timestamp NULL DEFAULT NULL COMMENT '创健日期',
+  `updateTime` timestamp NULL DEFAULT NULL COMMENT '修改日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;

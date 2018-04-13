@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ysdevelop.api.annotation.IgnoreAuth;
 import com.ysdevelop.api.entity.Member;
+import com.ysdevelop.api.shop.service.CartService;
 import com.ysdevelop.api.shop.service.MemberService;
 import com.ysdevelop.api.vo.LoginVo;
 import com.ysdevelop.common.result.Result;
@@ -22,6 +23,9 @@ import com.ysdevelop.common.utils.Constant;
 public class ApiMemberController {
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private CartService cartService;
     
 	@IgnoreAuth
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -35,7 +39,8 @@ public class ApiMemberController {
 	public Result<String> doLogin(@Valid LoginVo loginVo,HttpSession session,HttpServletResponse response) {
 		System.out.println(loginVo.getMobile() + "  " + loginVo.getPassword());
         memberService.login(loginVo,session,response);
-		return Result.success("登录成功");
+        cartService.save(loginVo.getId());
+        return Result.success("登录成功");
 
 	}
 

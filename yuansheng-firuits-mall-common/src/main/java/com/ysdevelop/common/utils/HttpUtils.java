@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -193,6 +194,22 @@ public class HttpUtils {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static String getCookieValue(HttpServletRequest request, String key) {
+		Cookie[] cookies = request.getCookies();
+		String value = null;
+		if (cookies == null || cookies.length == 0) {
+			return null;
+		} else {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals(key)) {
+					value = cookie.getValue();
+				}
+			}
+		}
+
+		return value;
 	}
 
 }
