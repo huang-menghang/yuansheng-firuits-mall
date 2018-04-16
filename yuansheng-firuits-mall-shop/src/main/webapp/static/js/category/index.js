@@ -1,6 +1,6 @@
 ;
 var category_index_ops = {
-	inint : function() {
+	init : function() {
 		this.getCategory(this.getParentId());
 		//this.eventBind();
 	},
@@ -55,5 +55,5 @@ var category_index_ops = {
 	},
 };
 $(function() {
-	category_index_ops.inint();
+	category_index_ops.init();
 });

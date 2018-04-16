@@ -41,6 +41,8 @@ public class Member extends BaseEntity{
     private String city;
     @NotEmpty(message="详细地址不能为空")
     private String detailAddress;
+    
+    private Long cartId;
 
 	public String getMobile() {
 		return mobile;
@@ -105,15 +107,16 @@ public class Member extends BaseEntity{
 	public void setDetailAddress(String detailAddress) {
 		this.detailAddress = detailAddress;
 	}
-
-	@Override
-	public String toString() {
-		return "Member [mobile=" + mobile + ", password=" + password + ", restaurant=" + restaurant + ", name=" + name + ", telephone=" + telephone
-				+ ", province=" + province + ", city=" + city + ", detailAddress=" + detailAddress + "]";
-	}
-    
-    
 	
+	public Long getCartId() {
+		return cartId;
+	}
 
+	public void setCartId(Long cartId) {
+		this.cartId = cartId;
+	}
+
+    
+   
 	
 }

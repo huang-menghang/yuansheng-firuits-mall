@@ -23,10 +23,10 @@ import com.ysdevelop.common.utils.Constant;
 public class ApiMemberController {
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private CartService cartService;
-    
+
 	@IgnoreAuth
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
@@ -36,11 +36,12 @@ public class ApiMemberController {
 	@IgnoreAuth
 	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
 	@ResponseBody
-	public Result<String> doLogin(@Valid LoginVo loginVo,HttpSession session,HttpServletResponse response) {
+	public Result<String> doLogin(@Valid LoginVo loginVo, HttpSession session, HttpServletResponse response) {
 		System.out.println(loginVo.getMobile() + "  " + loginVo.getPassword());
-        memberService.login(loginVo,session,response);
-        cartService.save(loginVo.getId());
-        return Result.success("登录成功");
+		Member loginMember = memberService.login(loginVo, session, response);
+		cartService.save(loginMember,session);
+		System.out.println(loginMember.getCartId());
+		return Result.success("登录成功");
 
 	}
 
@@ -49,7 +50,7 @@ public class ApiMemberController {
 	public String register() {
 		return "member/register";
 	}
-	
+
 	@IgnoreAuth
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
@@ -57,7 +58,7 @@ public class ApiMemberController {
 		memberService.save(member, confirmPassword, messageCode, session);
 		return Result.success("注册成功");
 	}
-	
+
 	@IgnoreAuth
 	@RequestMapping(value = "/getMobileMsg", method = RequestMethod.POST)
 	@ResponseBody
@@ -74,11 +75,9 @@ public class ApiMemberController {
 		return Result.success("删除过期msg成功");
 	}
 
-	
-	@RequestMapping(value="/center",method=RequestMethod.GET)
-	public String center(){
+	@RequestMapping(value = "/center", method = RequestMethod.GET)
+	public String center() {
 		return "member/center";
 	}
-	
-	
+
 }

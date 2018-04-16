@@ -1,13 +1,14 @@
 ;
+isAddCartItem = false;
 var index_ops = {
 
-	inint : function() {
-		this.inintScrollImage();
-		this.inintCategory();
-		this.inintGoods();
+	init : function() {
+		this.initScrollImage();
+		this.initCategory();
+		this.initGoods();
 		this.eventBind();
 	},
-	inintScrollImage : function() {
+	initScrollImage : function() {
 		$.ajax({
 			url : basePath + "scrollImage",
 			method : 'GET',
@@ -36,7 +37,7 @@ var index_ops = {
 			pagination : '.pagination',
 		});
 	},
-	inintCategory : function() {
+	initCategory : function() {
 		$.ajax({
 			url : basePath + "category",
 			method : "GET",
@@ -82,8 +83,12 @@ var index_ops = {
 								$(".goods-list").append(goodHtml);
 								goodHtml.fadeIn(2000);
 							});
-							$(".addToCart").click(function(){ 
+							$(".addToCart").click(function(){ 					         
 								               //购物车添加商品条目
+								              if(isAddCartItem){
+								            	  return;
+								              }
+								               isAddCartItem = true;
 								                var $that = $(this);
 								                 $.ajax({
 								                	 url:basePath+"cartItem/",
@@ -101,6 +106,10 @@ var index_ops = {
 								                		 }else{
 								                		 common_ops.msg(res.msg);
 								                		 }
+								                		 isAddCartItem = false;
+								                	 },
+								                	 error:function(){
+								                		 isAddCartItem = false;
 								                	 }
 								                 });
 												// var goodsId = $(this).attr();
@@ -110,7 +119,7 @@ var index_ops = {
 					}
 				});
 	},
-	inintGoods : function() {
+	initGoods : function() {
 		$(".tab_proList dt a").eq(0).addClass("currStyle");
 		this.changeGoods(0);
 	},
@@ -156,5 +165,5 @@ var index_ops = {
 	}
 };
 $(function() {
-	index_ops.inint();
+	index_ops.init();
 });

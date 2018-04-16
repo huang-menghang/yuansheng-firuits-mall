@@ -36,7 +36,7 @@
 		</dd>
 	</dl>
 	<div class="hoverCart">
-		<a href="<%=basePath%>cart/showCart.jspa"> <c:choose>
+		<a href="<%=basePath%>cart"> <c:choose>
 				<c:when test="${sessionScope.cart!=null}">
 				  ${sessionScope.cart.totalItemNo }
 			    </c:when>

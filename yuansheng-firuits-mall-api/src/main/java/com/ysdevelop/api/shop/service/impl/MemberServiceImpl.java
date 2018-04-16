@@ -57,7 +57,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void login(LoginVo loginVo, HttpSession session, HttpServletResponse response) {
+	public Member login(LoginVo loginVo, HttpSession session, HttpServletResponse response) {
 		Member memberLogin = memberDao.getByMobile(loginVo.getMobile());
 		if (memberLogin == null) {
 			throw new WebServiceException(CodeMsg.MEMBER_WRONG);
@@ -70,7 +70,7 @@ public class MemberServiceImpl implements MemberService {
 		// 随机生成uuid
 		String token = UUIDUtil.uuid();
 		addCookie(session, response, memberLogin, token);
-		loginVo.setId(memberLogin.getId());
+		return memberLogin;
 	}
 
 	private void addCookie(HttpSession session, HttpServletResponse response, Member member, String token) {

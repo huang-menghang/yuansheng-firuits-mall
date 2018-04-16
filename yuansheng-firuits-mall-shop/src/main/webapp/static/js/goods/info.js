@@ -1,10 +1,10 @@
 var goods_info_ops = {
-	inint:function(){
-		this.inintGoods(this.getGoodsId());
+	init:function(){
+		this.initGoods(this.getGoodsId());
 		this.eventBind();
 		
 	},
-	inintGoods:function(goodsId){
+	initGoods:function(goodsId){
 		$.ajax({
 			url:basePath+"/goods/"+goodsId,
 			method:"GET",
@@ -42,5 +42,5 @@ var goods_info_ops = {
 		
 };
 $(function(){
-	goods_info_ops.inint();
+	goods_info_ops.init();
 })

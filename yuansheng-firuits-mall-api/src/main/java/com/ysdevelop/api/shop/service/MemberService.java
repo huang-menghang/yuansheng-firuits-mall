@@ -11,6 +11,6 @@ public interface MemberService {
 
 	void sendMessage(HttpSession session, String mobile);
 	
-	void login(LoginVo loginVo,HttpSession session,HttpServletResponse response);
+	Member login(LoginVo loginVo,HttpSession session,HttpServletResponse response);
 	
 }
