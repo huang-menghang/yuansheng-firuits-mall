@@ -31,8 +31,8 @@
 <div class="cart-empty" >
  	    <div style="height:1rem;"></div>
         <aside class="btmNav">
-        <a class="a_total_price" totalPrice="${sessionScope.cart.cartTotalPrice}" >合计：￥${sessionScope.cart.cartTotalPrice}</a>
-        <a class="a_confirm_order"  style="background:grey;color:white;text-shadow:none;" >立即下单</a>
+        <a  totalPrice="" >合计：0 元</a>
+        <a  style="background:grey;color:white;text-shadow:none;" >立即下单</a>
         </aside>
 		<mark style='display:block;background:none;text-align:center;color:grey;'>购物车为空！</mark>
 </div>

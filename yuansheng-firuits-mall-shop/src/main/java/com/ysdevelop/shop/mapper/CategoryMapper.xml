@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysdevelop.shop.mapper.CategoryDao">
+
+	<select id="list" resultType="com.ysdevelop.shop.entity.Category">
+		select `id`,`name`,`imagePath`
+		from `t_ys_firuits_category`
+		where `level` = 1 and `parentId` = -1
+		order by `sort` desc
+	</select>
+
+    <select id="listById" resultType="com.ysdevelop.shop.entity.Category">
+        select `id`,`name`
+		from `t_ys_firuits_category`
+		where `level` = 2 and `parentId` = #{parentId}
+		order by `sort` desc
+    </select>
+
+</mapper>

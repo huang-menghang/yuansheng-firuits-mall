@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysdevelop.shop.mapper.MemberDao">
+   <insert id="save" parameterType="com.ysdevelop.shop.entity.Member">
+   insert into `t_ys_firuits_mall_member`
+   (`name`,`mobile`,`password`,`restaurant`,`telephone`,`province`,`city`,`detailAddress`,`createTime`)
+   value(#{name},#{mobile},#{password},#{restaurant},#{telephone},#{province},#{city},#{detailAddress},now())
+   </insert>
+   
+   <select id="countByMobile" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(`id`)
+    from `t_ys_firuits_mall_member`
+    where `mobile` = #{mobile}		
+   </select>
+   
+   <select id="getByMobile" resultType="com.ysdevelop.shop.entity.Member">
+    select 
+    `id`,`name`,`mobile`,`password`
+    from `t_ys_firuits_mall_member`
+    where `mobile` = #{mobile}
+   </select>
+   
+</mapper>
