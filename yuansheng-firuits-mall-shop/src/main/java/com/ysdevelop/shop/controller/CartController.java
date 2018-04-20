@@ -10,6 +10,7 @@ import com.ysdevelop.common.exception.WebServiceException;
 import com.ysdevelop.common.result.CodeMsg;
 import com.ysdevelop.common.result.Result;
 import com.ysdevelop.common.utils.JSONHelper;
+import com.ysdevelop.shop.annotation.IgnoreAuth;
 import com.ysdevelop.shop.annotation.LoginUser;
 import com.ysdevelop.shop.entity.Cart;
 import com.ysdevelop.shop.entity.Member;
@@ -37,4 +38,12 @@ public class CartController {
 		System.out.println(cart);
 		return Result.successData(JSONHelper.bean2json(cart));
 	}
+	@IgnoreAuth
+	@RequestMapping(value="countGoods",method = RequestMethod.GET)
+	@ResponseBody
+	public Result<Integer> countGoods(@LoginUser Member member){
+		Integer goodsCount = cartService.countGoodsById(member.getCartId());
+		return Result.successData(goodsCount);
+	}
+	
 }

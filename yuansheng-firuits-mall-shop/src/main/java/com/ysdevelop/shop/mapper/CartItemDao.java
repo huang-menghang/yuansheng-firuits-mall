@@ -18,4 +18,8 @@ public interface CartItemDao {
 
 	List<CartItem> listByCartId(Long cartId);
 	
+	void updateStatusById(Long id);
+
+	void updateBatchByList(@Param(value="items")List<CartItem> items);
+	
 }

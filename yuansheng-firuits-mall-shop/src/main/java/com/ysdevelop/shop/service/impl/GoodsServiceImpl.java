@@ -1,10 +1,12 @@
 package com.ysdevelop.shop.service.impl;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ysdevelop.common.exception.WebServiceException;
+import com.ysdevelop.common.page.Pagination;
 import com.ysdevelop.common.result.CodeMsg;
 import com.ysdevelop.common.utils.Constant;
 import com.ysdevelop.shop.entity.Goods;
@@ -32,5 +34,18 @@ public class GoodsServiceImpl implements GoodsService {
 		}
 		return goodsDao.getById(id);
 	}
+
+	@Override
+	public Pagination<Goods> pagination(Map<String, Object> queryMap, Pagination<Goods> pagination) {
+		Integer itemsCount = goodsDao.countByQueryMap(queryMap);
+		pagination.setTotalItemsCount(itemsCount);
+		List<Goods> items = goodsDao.listByQueryMap(queryMap,pagination);
+        pagination.setItems(items);
+        return pagination;
+	}
+
+	
+
+	
 
 }

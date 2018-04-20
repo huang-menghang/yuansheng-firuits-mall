@@ -33,6 +33,7 @@ var member_login_ops = {
 							 if(rurl == null){
 								 rurl = basePath+"index";
 							 }
+							 console.log(rurl);
 							 window.location.href = rurl;
 						 };	
 						}else{

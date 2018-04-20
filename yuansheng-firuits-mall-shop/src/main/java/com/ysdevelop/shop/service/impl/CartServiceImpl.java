@@ -53,4 +53,12 @@ public class CartServiceImpl implements CartService {
 		return cart;
 	}
 
+	@Override
+	public Integer countGoodsById(Long id) {
+		if(id == null){
+			throw new WebServiceException(CodeMsg.SERVER_ERROR);
+		}
+		return cartDao.countGoodsById(id);
+	}
+
 }

@@ -12,7 +12,7 @@
 	<header>
 		<a href="<%=basePath%>home/homeLocation.jspa" class="location">西安市</a>
 		<h1 class="logoIcon" style="font-size: .85rem;">&#35;</h1>
-		<a href="<%=basePath%>home/homeSearch.jspa" class="rt_searchIcon">&#37;</a>
+		<a href="<%=basePath%>search/index" class="rt_searchIcon">&#37;</a>
 	</header>
 	<div style="height: 1rem;"></div>
 	<!--slide-->
@@ -36,14 +36,7 @@
 		</dd>
 	</dl>
 	<div class="hoverCart">
-		<a href="<%=basePath%>cart"> <c:choose>
-				<c:when test="${sessionScope.cart!=null}">
-				  ${sessionScope.cart.totalItemNo }
-			    </c:when>
-				<c:otherwise>
-				  0
-				</c:otherwise>
-			</c:choose>
+		<a href="<%=basePath%>cart"> 
 		</a>
 	</div>
 	<div style="height: 1.2rem;"></div>

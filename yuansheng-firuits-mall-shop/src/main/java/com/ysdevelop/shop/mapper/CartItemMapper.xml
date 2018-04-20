@@ -38,5 +38,20 @@
 		left join `t_ys_firuits_goods` as `goods` on `goods`.id = `item`.goodsId
 		where `item`.cartId = #{cartId} and `item`.status = 0
 	</select>
+	
+	<update id="updateStatusById">
+	  update `t_ys_firuits_cart_item` set status = 1 where id = #{id}
+	</update>
+	
+	<update id="updateBatchByList" parameterType="java.util.List">
+	 <foreach collection="items" item="item" index="index" open="" close="" separator=";">
+	    update `t_ys_firuits_cart_item`  
+        <set>  
+            goodsCount=#{item.goodsCount},
+            updateTime = now()  
+        </set> 
+            where id=#{item.id}
+	 </foreach>
+	</update>
 
 </mapper>

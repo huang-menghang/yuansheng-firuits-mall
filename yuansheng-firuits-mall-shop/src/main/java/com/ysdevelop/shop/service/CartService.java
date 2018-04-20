@@ -12,5 +12,7 @@ public interface CartService {
 	void save(Member member,HttpSession httpSession);
 	
 	Cart getById(Long id);
+
+	Integer countGoodsById(Long id);
 	
 }

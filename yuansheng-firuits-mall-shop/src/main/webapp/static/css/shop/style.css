@@ -118,7 +118,7 @@ nav .userIcon:before{content:"U";}
 .goodsInfor .addToCart{position:absolute;top:30%;right:3%;font-family:'freshregular';font-size:.65rem;color:#f0c600;}
 /*hover cart*/
 .hoverCart{background:#d2d2d2;width:.75rem;height:.75rem;box-shadow:0 0 2px #d2d2d2;line-height:.75rem;text-align:center;border-radius:50%;position:fixed;bottom:1.2rem;right:3%;}
-.hoverCart a{display:block;width:.32rem;height:.32rem;text-align:center;line-height:.32rem;position:absolute;top:0;right:0;background:red;border-radius:50%;color:white;font-size:.2rem;}
+.hoverCart a{display:block;width:.48rem;height:.32rem;text-align:center;line-height:.32rem;position:absolute;top:0;right:0;background:red;border-radius:50%;color:white;font-size:.2rem;}
 .hoverCart:before{font-family:'freshregular';content:"G";color:white;font-size:.5rem;}
 /*category page*/
 .class_tree{width:2.2rem;height:auto;float:left;}

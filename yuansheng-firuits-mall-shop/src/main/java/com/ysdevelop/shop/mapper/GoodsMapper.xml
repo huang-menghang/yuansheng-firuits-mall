@@ -32,5 +32,97 @@
 	  where `goods`.id = #{id}
 	</select>
 
+    <select id="countByQueryMap" resultType="java.lang.Integer" parameterType="java.util.Map" >
+      SELECT
+      count(`g`.`id`)
+      FROM `t_ys_firuits_goods` as `g`
+      LEFT JOIN `t_ys_firuits_brand` as `b` ON `b`.id = `g`.brandId 
+      LEFT JOIN `t_ys_firuits_category` as `c1` ON `g`.categoryId = `c1`.id AND `c1`.`level` = 2
+      LEFT JOIN `t_ys_firuits_category` as `c2` ON `c2`.id = `c1`.parentId AND `c2`.`level` = 1
+      WHERE 1=1
+       <if test="queryMap.categoryId != null and queryMap.categoryId != 'null' and queryMap.categoryId != '' ">
+       and 
+       `c1`.id = #{queryMap.categoryId}
+       </if>
+       <if test="queryMap.categorySupId != null and queryMap.categorySupId != 'null' and queryMap.categorySupId != '' ">
+       and
+       `c2`.id = #{queryMap.categorySupId}
+       </if>
+       <if test="queryMap.brandId != null and queryMap.brandId != 'null' and queryMap.brandId != '' and queryMap.brandId != 0 ">
+       and
+       `b`.id = #{queryMap.brandId} 
+       </if>
+       <if test="queryMap.query != null and queryMap.query != 'null'  and queryMap.query != '' ">
+         and (
+        `g`.name like  CONCAT('%',#{queryMap.query},'%')
+         or
+        `g`.description like CONCAT('%',#{queryMap.query},'%')
+         or
+        `b`.name like CONCAT('%',#{queryMap.query},'%')
+         or
+         `c1`.name like CONCAT('%',#{queryMap.query},'%'))
+       </if>
+    
+    
+    </select>
+    
+    <select id="listByQueryMap" resultType="com.ysdevelop.shop.entity.Goods">
+      SELECT
+      `g`.id as `id`,
+      `g`.name as `name`,
+      `g`.discoutPrice as `discoutPrice`,
+      `g`.price as `price`,
+      `g`.imagePath as `imagePath`
+      FROM `t_ys_firuits_goods` as `g`
+      LEFT JOIN `t_ys_firuits_brand` as `b` ON `b`.id = `g`.brandId
+      LEFT JOIN `t_ys_firuits_category` as `c1` ON `g`.categoryId = `c1`.id AND `c1`.`level` = 2
+      LEFT JOIN `t_ys_firuits_category` as `c2` ON `c2`.id = `c1`.parentId AND `c2`.`level` = 1
+      WHERE 1=1
+       <if test="queryMap.categoryId != null and queryMap.categoryId != 'null' and queryMap.categoryId != '' ">
+       and 
+       `c1`.id = #{queryMap.categoryId}
+       </if>
+       <if test="queryMap.categorySupId != null and queryMap.categorySupId != 'null' and  queryMap.categorySupId != '' ">
+       and
+       `c2`.id = #{queryMap.categorySupId}
+       </if>
+        <if test="queryMap.brandId != null and queryMap.brandId != 'null' and queryMap.brandId != '' and queryMap.brandId != 0 ">
+        and
+        `b`.id = #{queryMap.brandId} 
+       </if>
+       <if test="queryMap.query != null and queryMap.query != 'null' and queryMap.query != '' ">
+         and (
+        `g`.name like  CONCAT('%',#{queryMap.query},'%')
+         or
+        `g`.description like CONCAT('%',#{queryMap.query},'%')
+         or
+        `b`.name like CONCAT('%',#{queryMap.query},'%')
+         or
+         `c1`.name like CONCAT('%',#{queryMap.query},'%'))
+       </if>
+       <if test="queryMap.priceSort != null ">
+        <choose>
+        <when test="queryMap.priceSort == 1">
+         order by `g`.discoutPrice asc 
+        </when>
+        <otherwise>
+         order by `g`.discoutPrice desc
+        </otherwise>
+        </choose>
+       </if>
+       <if test="queryMap.saleSort != null ">
+        <choose>
+        <when test="queryMap.saleSort == 1">
+         order by `g`.`sales` asc
+        </when>
+        <otherwise>
+         order by `g`.`sales` desc
+        </otherwise>
+        </choose>
+       </if>
+       limit #{pagination.start},#{pagination.pageSize}
+    
+    </select>
+
 
 </mapper>

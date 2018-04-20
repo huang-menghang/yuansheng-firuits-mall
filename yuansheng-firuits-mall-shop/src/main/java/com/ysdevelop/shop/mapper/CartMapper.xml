@@ -14,5 +14,12 @@
 	  where `memberId` = #{memberId}
 	</select> 
 	
+	<select id="countGoodsById" resultType="java.lang.Integer" >
+	  select 
+	  sum(`item`.goodsCount) 
+	  from `t_ys_firuits_cart` as `c`
+	  left join `t_ys_firuits_cart_item` as `item` on `item`.cartId = `c`.id
+	  where `c`.id = #{id}
+	</select>
 
 </mapper>

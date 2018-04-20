@@ -6,4 +6,6 @@ public interface CartDao {
 	void save(Cart cart);
 
 	Cart getByMemberId(Long memberId);
+
+	Integer countGoodsById(Long id);
 }

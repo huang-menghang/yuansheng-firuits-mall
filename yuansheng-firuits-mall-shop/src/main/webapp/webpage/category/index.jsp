@@ -12,7 +12,7 @@
 	<header>
 		<a onclick="backHome()" class="iconfont backIcon">&#60;</a>
 		<h1>动态分类名称</h1>
-		<a href="<%=basePath%>home/homeSearch.jspa" class="rt_searchIcon">&#37;</a>
+		<a href="<%=basePath%>search/index" class="rt_searchIcon">&#37;</a>
 	</header>
 	<div style="height: 1rem;"></div>
 	<!--category list-->

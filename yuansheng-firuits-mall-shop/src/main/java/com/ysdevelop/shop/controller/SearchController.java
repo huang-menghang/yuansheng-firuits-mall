@@ -7,20 +7,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ysdevelop.shop.annotation.IgnoreAuth;
 
 @Controller
-@RequestMapping("/index")
-public class IndexController {
-
-	@IgnoreAuth
-	@RequestMapping(value="",method=RequestMethod.GET)
-	public String index(){
-		return "index/index";
-	}
-
+@RequestMapping("/search")
+public class SearchController {
 	
 	@IgnoreAuth
-	@RequestMapping(value="/search",method=RequestMethod.GET)
-	public String search(){
-		return "index/search";
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String index() {
+		return "search/index";
 	}
 
 }

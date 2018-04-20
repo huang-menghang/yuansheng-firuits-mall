@@ -27,6 +27,9 @@ public class Goods extends BaseEntity {
 	private String description;
 
 	private Long brandId;
+	
+	private Long categoryId;
+	
 	// 上市时间
 	private Date launcTime;
 
@@ -122,6 +125,15 @@ public class Goods extends BaseEntity {
 	public void setBrandId(Long brandId) {
 		this.brandId = brandId;
 	}
+
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+	
 
 	public Date getLauncTime() {
 		return launcTime;

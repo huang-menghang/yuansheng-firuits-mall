@@ -31,9 +31,9 @@ var category_index_ops = {
 			        	success:function(res){
 			        		if(res.code == 0){
 			        			$(".category_cont").empty();
-			        			$(".category_cont").append("<li><a href='"+basePath+"goods'>全部</a></li>")
+			        			$(".category_cont").append("<li><a href='"+basePath+"goods?categoryId=&categorySupId="+parentId+"'>全部</a></li>")
 			        			$.each($.parseJSON(res.data),function(i,v){
-				        			$(".category_cont").append("<li><a href='"+basePath+"goods'>"+v.name+"</a></li>");				        				
+				        			$(".category_cont").append("<li><a href='"+basePath+"goods?categoryId="+v.id+"&categorySupId="+parentId+"'>"+v.name+"</a></li>");				        				
 		        			    });
 			        		}
 			        	}

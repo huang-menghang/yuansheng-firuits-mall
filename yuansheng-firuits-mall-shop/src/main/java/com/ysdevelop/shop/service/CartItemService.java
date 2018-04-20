@@ -8,4 +8,8 @@ public interface CartItemService {
 	void save(Long cartId, Long goodsId);
 
 	List<CartItem> listByCartId(Long cartId);
+	
+	void updateStatusById(Long id);
+
+	void updateItemBatch(List<CartItem> items);
 }

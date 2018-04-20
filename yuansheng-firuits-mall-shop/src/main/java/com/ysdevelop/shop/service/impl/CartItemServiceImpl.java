@@ -5,10 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-
-
-
 import com.ysdevelop.common.exception.WebServiceException;
 import com.ysdevelop.common.result.CodeMsg;
 import com.ysdevelop.shop.entity.CartItem;
@@ -48,6 +44,24 @@ public class CartItemServiceImpl implements CartItemService {
 		List<CartItem> cartItems = cartItemDao.listByCartId(cartId);
 
 		return cartItems;
+	}
+
+	@Override
+	public void updateStatusById(Long id) {
+		if (id == null) {
+			throw new WebServiceException(CodeMsg.SERVER_ERROR);
+		}
+		cartItemDao.updateStatusById(id);
+	}
+
+	@Override
+	public void updateItemBatch(List<CartItem> items) {
+		if (items == null || items.size() == 0) {
+			throw new WebServiceException(CodeMsg.SERVER_ERROR);
+		}
+
+		cartItemDao.updateBatchByList(items);
+
 	}
 
 }

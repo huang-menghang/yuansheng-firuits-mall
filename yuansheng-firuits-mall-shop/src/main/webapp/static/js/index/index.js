@@ -6,6 +6,7 @@ var index_ops = {
 		this.initScrollImage();
 		this.initCategory();
 		this.initGoods();
+		this.initCartGoodsCount();
 		this.eventBind();
 	},
 	initScrollImage : function() {
@@ -55,6 +56,22 @@ var index_ops = {
 				}
 			}
 		})
+	},
+	initCartGoodsCount:function(){
+		$.ajax({
+			url:basePath+"cart/countGoods",
+			type:"text/json",
+			method:"GET",
+			success:function(res){
+				console.log(res);
+				if(res.code == 0){
+					$(".hoverCart a").html(res.data);
+				}
+				else{
+					$(".hoverCart a").html(0);
+				}
+			}
+		});
 	},
 	changeGoods : function(queryId) {
 		var that = this;
