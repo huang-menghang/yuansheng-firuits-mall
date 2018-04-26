@@ -13,5 +13,10 @@ public interface MemberService {
 	void sendMessage(HttpSession session, String mobile);
 	
 	Member login(LoginVo loginVo,HttpSession session,HttpServletResponse response);
+
+	Integer updateNameAndMobileById(String name, String tel, Long id);
 	
+	void refreshSessionMember(HttpSession session,String token,Member member);
+
+	String  updatePasswordById(String newPassword, String newConfirmPassword, String oldPassword, Member loginMember);
 }

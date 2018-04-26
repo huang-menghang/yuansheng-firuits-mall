@@ -1,8 +1,24 @@
 var goods_info_ops = {
 	init:function(){
 		this.initGoods(this.getGoodsId());
+		this.initCartGoodCount();	
 		this.eventBind();
 		
+	},
+	initCartGoodCount:function(){
+		$.ajax({
+			url:basePath+"cart/countGoods",
+			method:"GET",
+			type:"text/json",
+			success:function(res){
+				if(res.code == 0){
+					$(".topCart em").html(res.data);
+				}
+				else{
+					$(".topCart em").html(0);
+				}
+			}
+		});
 	},
 	initGoods:function(goodsId){
 		$.ajax({
@@ -24,6 +40,8 @@ var goods_info_ops = {
 					  $(".packet em").html(packet);
 					  $(".storage em").html(goods.storage+"个月");
 					  $(".brandName em").html(goods.brandName);
+					  $(".addToCart").attr("goodsId",goods.id);
+					  $(".addToFavor").attr("goodsId",goods.id);
 					}				
 				}
 			}
@@ -36,7 +54,56 @@ var goods_info_ops = {
 		}
 	},
 	eventBind:function(){
-		
+		var that = this;
+		$(".addToCart").click(function(){
+			var goodsId = $(this).attr("goodsId");
+			$.ajax({
+				url:basePath+"cartItem",
+				method:"POST",
+				data:{goodsId:goodsId},
+				type:"text/json",
+				success:function(res){
+					var callback = null;
+					if(res.code == 0){
+						callback = function(){
+							that.initCartGoodCount();
+						};
+						common_ops.msg("添加购物车成功",callback);
+					}else if(res.code == 500008){
+						callback = function(){
+							window.location.href = basePath+"member/login?rurl="+window.location.href;
+						};
+						common_ops.msg("请先登录",callback);
+					}else{
+						common_ops.msg(res.msg,callback);
+					}
+				}
+				
+			});
+		});
+	    $(".addToFavor").click(function(){
+	    	var goodsId = $(this).attr("goodsId");
+			$.ajax({
+				url:basePath+"goodsFav",
+				method:"POST",
+				data:{goodsId:goodsId},
+				type:"text/json",
+				success:function(res){
+					var callback = null;
+					if(res.code == 0){
+						common_ops.msg(res.msg,callback);
+					}else if(res.code == 500008){
+						callback = function(){
+							window.location.href = basePath+"member/login?rurl="+window.location.href;
+						};
+						common_ops.msg("请先登录",callback);
+					}else{
+						common_ops.msg(res.msg,callback);
+					}
+				}
+				
+			});
+		});
 	}
 	
 		

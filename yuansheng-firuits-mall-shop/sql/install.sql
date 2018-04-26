@@ -93,3 +93,14 @@ CREATE TABLE `t_ys_firuits_cart_item` (
   `updateTime` timestamp NULL DEFAULT NULL COMMENT '修改日期',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `t_ys_firuits_member_fav`;
+CREATE TABLE `t_ys_firuits_member_fav` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '购物车条目id', 
+  `goodsId` int(11) NULL COMMENT '商品id',
+  `memberId` int(11) NULL COMMENT '用户id',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0表示未清空,1表示清空',
+  `createTime` timestamp NULL DEFAULT NULL COMMENT '创健日期',
+  `updateTime` timestamp NULL DEFAULT NULL COMMENT '修改日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

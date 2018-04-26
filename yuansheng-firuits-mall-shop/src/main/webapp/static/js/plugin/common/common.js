@@ -240,3 +240,14 @@ Math.add = function(v1, v2)
  ///<returns type="number">计算结果。</returns>
    return Math.div(this, v);
  }
+//返回刷新
+ function backAndRefresh(){
+	    var referrer = document.referrer;
+	    var curWwwPath=window.document.location.href;  
+	    if((referrer.indexOf("login")!=-1)&&(curWwwPath.indexOf("registe")==-1)){
+	    	window.location.href=basePath+"index";
+	    }else{
+	        window.location.href=referrer;  
+	    }
+ }
+ 

@@ -12,15 +12,8 @@
 <header>
  <a onclick="backAndRefresh()" class="iconfont backIcon">&#60;</a>
  <h1>产品详情</h1>
- <a href="<%=basePath%>cart/showCart.jspa" class="topCart"><em>
- <c:choose>
- <c:when test="${sessionScope.cart!=null}">
- ${sessionScope.cart.totalItemNo }
-  </c:when>
- <c:otherwise>
-	0
-</c:otherwise>
- </c:choose></em>
+ <a href="<%=basePath%>cart" class="topCart"><em>
+ </em>
  </a>
 </header>
 <div style="height:1rem;"></div>
@@ -124,8 +117,8 @@
 <!--bottom nav-->
 <div style="height:1rem;"></div>
 <aside class="btmNav">
- <a style="background:#64ab5b;color:white;text-shadow:none;" class="addToCart" cartId="${sessionScope.cart.id}" productId="${firuitsProduct.id}" customerId="${sessionScope.customer.id}">加入购物车</a>
- <a style="background:#87a983;color:white;text-shadow:none;" class="addToFavor" productId="${firuitsProduct.id}" customerId="${sessionScope.customer.id}">加入常购单</a>
+ <a style="background:#64ab5b;color:white;text-shadow:none;" class="addToCart"  goodsId="" >加入购物车</a>
+ <a style="background:#87a983;color:white;text-shadow:none;" class="addToFavor" goodsId="">加入常购单</a>
 </aside>
 <jsp:include page="/context/js-tags.jsp"/>
 <script type="text/javascript" src="<%=basePath%>static/js/goods/info.js"></script>

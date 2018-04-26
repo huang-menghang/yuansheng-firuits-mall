@@ -20,4 +20,32 @@
     where `mobile` = #{mobile}
    </select>
    
+   <update id="updateNameAndMobileById">
+   update `t_ys_firuits_mall_member`
+   <if test="name != null and name != '' ">
+   <set>
+    name = #{name}
+   </set>
+   </if>
+   <if test="mobile != null and mobile != '' ">
+   <set>
+    mobile = #{mobile}
+   </set>
+   </if>
+   <where>
+    id = #{id}
+   </where>
+   </update>
+   
+   <update id="updatePasswordById">
+     update `t_ys_firuits_mall_member`
+   <set>
+    password = #{password}
+   </set>
+   <where>
+    id = #{id}
+   </where>
+   
+   </update>
+   
 </mapper>

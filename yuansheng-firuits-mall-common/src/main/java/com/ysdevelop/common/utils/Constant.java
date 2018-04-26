@@ -3,7 +3,11 @@ package com.ysdevelop.common.utils;
 public class Constant {
   public static String MOBILE_MSG = "randomNumber";
   public static String TOKEN_NAME = "token";
-	
+
+  public static Integer DEFALUT_INTEGER_ZERO = 0;
+  
+  public static Integer DEFALUT_INTEGER_ONE = 1;
+
   
   /**
    * 菜单类型

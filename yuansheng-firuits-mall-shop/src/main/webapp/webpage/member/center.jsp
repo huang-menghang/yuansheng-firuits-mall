@@ -10,9 +10,9 @@
 <body>
 <!--header-->
 <header>
- <a onclick="backHome()" class="iconfont backIcon">&#60;</a>
+ <a onclick="backAndRefresh()" class="iconfont backIcon">&#60;</a>
  <h1>个人中心</h1>
- <a href="<%=basePath %>userCenter/userSet.jspa" class="iconfont setIcon">&#42;</a>
+ <a href="<%=basePath %>member/set" class="iconfont setIcon">&#42;</a>
 </header>
 <div style="height:1rem;"></div>
 <div class="userInfor">
@@ -22,7 +22,7 @@
 <ul class="userList">
  <li><a href="<%=basePath %>userCenter/myOrderList.jspa" class="orderListIcon">我的订单</a></li>
  <li><a href="<%=basePath %>userCenter/paginationEntityFavourite.jspa" class="collectionIcon">常购清单</a></li>
- <li><a href="<%=basePath %>userCenter/myProfile.jspa" class="profileIcon">个人资料</a></li>
+ <li><a href="<%=basePath %>member/profile" class="profileIcon">个人资料</a></li>
 </ul>
 <!--fixedNav:footer-->
 <div style="height:1.2rem;"></div>
@@ -31,6 +31,7 @@
   document.oncontextmenu=new Function("event.returnValue=false;");
   document.onselectstart=new Function("event.returnValue=false;"); 
 </script>
+<jsp:include page="/context/js-tags.jsp"/>
 
 </body>
 </html>

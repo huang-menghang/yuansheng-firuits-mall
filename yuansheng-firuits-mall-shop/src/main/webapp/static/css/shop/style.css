@@ -56,7 +56,7 @@ small,weak{color:#666}
 .backIcon{display:block;position:absolute;left:0;top:0;padding:0 .3rem;color:white;font-size:.4rem;}
 .topCart{position:absolute;right:0;top:0;display:block;height:1rem;color:white;padding:0 .3rem;}
 .topCart:before{content:"G";font-family:'freshregular';font-size:.6rem}
-.topCart em{display:block;position:absolute;top:.15rem;right:12%;width:.36rem;height:.36rem;line-height:.36rem;text-align:center;font-size:.2rem;font-style:normal;border-radius:50%;background:red;}
+.topCart em{display:block;position:absolute;top:.15rem;right:12%;width:.48rem;height:.36rem;line-height:.36rem;text-align:center;font-size:.2rem;font-style:normal;border-radius:50%;background:red;}
 .setIcon{position:absolute;right:0;top:0;display:block;color:white;padding:0 .3rem;font-size:.5rem;}
 header{height:1rem;line-height:1rem;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #21d9a2), color-stop(1, #31bd80));position:fixed;top:0;left:0;width:100%;z-index:99;}
 header h1{margin:0;text-align:center;width:50%;margin:0 auto;height:1rem;line-height:1rem;color:white;}

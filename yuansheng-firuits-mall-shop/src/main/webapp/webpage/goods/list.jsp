@@ -10,7 +10,7 @@
 <body style="background: white;">
 	<!--header-->
 	<header>
-		<a onclick ="backSearchOrCategory()" class="iconfont backIcon" >&#60;</a>
+		<a onclick ="backAndRefresh()" class="iconfont backIcon" >&#60;</a>
 		<h1>产品列表</h1>
 		<a href="<%=basePath%>search/index" class="rt_searchIcon">&#63;</a>
 	</header>

@@ -63,7 +63,6 @@ var index_ops = {
 			type:"text/json",
 			method:"GET",
 			success:function(res){
-				console.log(res);
 				if(res.code == 0){
 					$(".hoverCart a").html(res.data);
 				}

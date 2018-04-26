@@ -58,6 +58,9 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 
 	private boolean checkAuth(Cookie[] cookies, HttpServletRequest request) {
 		Cookie tokenCookie = null;
+		if(cookies == null || cookies.length == 0){
+			return false;
+		}
 		for (Cookie cookie : cookies) {
 			if (cookie.getName().equals(Constant.TOKEN_NAME)) {
 				tokenCookie = cookie;

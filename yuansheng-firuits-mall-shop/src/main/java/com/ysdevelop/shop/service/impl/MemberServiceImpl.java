@@ -73,12 +73,46 @@ public class MemberServiceImpl implements MemberService {
 		return memberLogin;
 	}
 
+	@Override
+	public Integer updateNameAndMobileById(String name, String mobile, Long id) {
+		Integer changeCount = memberDao.updateNameAndMobileById(name, mobile, id);
+		return changeCount;
+	}
+
 	private void addCookie(HttpSession session, HttpServletResponse response, Member member, String token) {
 		session.setAttribute(token, member);
 		Cookie cookie = new Cookie(Constant.TOKEN_NAME, token);
 		cookie.setMaxAge(session.getMaxInactiveInterval() - 200);
 		cookie.setPath("/");
 		response.addCookie(cookie);
+	}
+
+	@Override
+	public void refreshSessionMember(HttpSession session, String token, Member member) {
+		session.setAttribute(token, member);
+	}
+
+	@Override
+	public String updatePasswordById(String newPassword, String newConfirmPassword, String oldPassword, Member member) {
+		if (newPassword == null || newConfirmPassword == null || oldPassword == null) {
+			throw new WebServiceException(CodeMsg.SERVER_ERROR);
+		}
+
+		if (!newPassword.equals(newConfirmPassword)) {
+			throw new WebServiceException(CodeMsg.PASSWORD_CONFIRM);
+		}
+
+		if (Md5Util.inputPassToDbPass(newPassword).equals(member.getPassword())) {
+			throw new WebServiceException(CodeMsg.NEWOLDPASSWOR_SAME);
+		}
+
+		if (!Md5Util.formPassToDBPass(oldPassword).equals(member.getPassword())) {
+			throw new WebServiceException(CodeMsg.OLDPASSWORD_WRONG);
+		}
+		String dbPassword = Md5Util.inputPassToDbPass(newConfirmPassword);
+		memberDao.updatePasswordById(dbPassword, member.getId());
+
+		return dbPassword;
 	}
 
 }

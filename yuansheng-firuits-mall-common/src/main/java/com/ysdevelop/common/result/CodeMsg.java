@@ -21,6 +21,8 @@ public class CodeMsg {
 	public static CodeMsg MESSAGE_CODE_WRONG =  new CodeMsg(500006,"手机验证码错误");
 	public static CodeMsg MEMBER_WRONG =  new CodeMsg(500007,"手机号码不存在");
 	public static CodeMsg MEMBER_UNLOGIN = new CodeMsg(500008, "用户未登录");
+	public static CodeMsg OLDPASSWORD_WRONG =  new CodeMsg(500009,"旧密码输入错误");
+	public static CodeMsg NEWOLDPASSWOR_SAME =  new CodeMsg(500010,"新旧密码一致");
 	
 	private CodeMsg(int code, String msg) {
 		this.code = code;
