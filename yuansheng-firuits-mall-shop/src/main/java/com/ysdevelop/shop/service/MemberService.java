@@ -19,4 +19,6 @@ public interface MemberService {
 	void refreshSessionMember(HttpSession session,String token,Member member);
 
 	String  updatePasswordById(String newPassword, String newConfirmPassword, String oldPassword, Member loginMember);
+
+	void updateAddressById(Member member, Member loginMember);
 }

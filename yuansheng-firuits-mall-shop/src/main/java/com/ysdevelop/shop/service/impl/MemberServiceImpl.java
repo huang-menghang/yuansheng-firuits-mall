@@ -115,4 +115,16 @@ public class MemberServiceImpl implements MemberService {
 		return dbPassword;
 	}
 
+	@Override
+	public void updateAddressById(Member member,Member loginMember) {
+		if(member == null){
+			throw new WebServiceException(CodeMsg.SERVER_ERROR);
+		}
+		memberDao.updateAddressById(member);
+		loginMember.setProvince(member.getProvince());
+		loginMember.setCity(member.getCity());
+		loginMember.setTown(member.getTown());
+		loginMember.setDetailAddress(member.getDetailAddress());
+	}
+
 }

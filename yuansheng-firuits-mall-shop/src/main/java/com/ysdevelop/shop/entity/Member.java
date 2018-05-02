@@ -40,6 +40,7 @@ public class Member extends BaseEntity {
 	private String province;
 	@NotEmpty(message = "请选择省市")
 	private String city;
+	private String town;
 	@NotEmpty(message = "详细地址不能为空")
 	private String detailAddress;
 
@@ -99,6 +100,14 @@ public class Member extends BaseEntity {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getTown() {
+		return town;
+	}
+
+	public void setTown(String town) {
+		this.town = town;
 	}
 
 	public String getDetailAddress() {

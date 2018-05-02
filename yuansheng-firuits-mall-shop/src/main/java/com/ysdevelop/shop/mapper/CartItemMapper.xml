@@ -53,5 +53,38 @@
             where id=#{item.id}
 	 </foreach>
 	</update>
+	
+	<update id="updateStatusBatchByIds"  parameterType="java.util.List">
+	   update `t_ys_firuits_cart_item`  
+        <set>  
+           status = 1,
+           updateTime = now()  
+        </set> 
+        where id in
+        <foreach collection="ids" item="id" index="index"  open="(" close=")" separator=",">
+         #{id}
+        </foreach>
+	
+	</update>
+	
+	<select id="listByIds" parameterType="java.util.List" resultType="com.ysdevelop.shop.entity.CartItem">
+	 select
+	    `item`.id as `id`,
+		`item`.goodsCount as `goodsCount`,
+		ROUND(`goods`.discoutPrice*`item`.goodsCount,2) as `goodsTotalPrice`,
+		`goods`.id as `goodsId`,
+		`goods`.name as `goodsName`,
+		`goods`.imagePath as `goodsImagePath`,
+		`goods`.discoutPrice as `goodsDiscoutPrice`,
+		`goods`.price as `goodsPrice`
+		from `t_ys_firuits_cart_item` as `item`
+		left join `t_ys_firuits_goods` as `goods` on `goods`.id = `item`.goodsId
+	 where `item`.id in
+	 <foreach collection="ids" item="id" index="index"  open="(" close=")" separator="," >
+	  #{id}
+	 </foreach>
+	 and status = 1
+	
+	</select>
 
 </mapper>

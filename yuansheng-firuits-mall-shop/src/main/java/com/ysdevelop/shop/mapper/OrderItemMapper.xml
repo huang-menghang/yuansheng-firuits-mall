@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysdevelop.shop.mapper.OrderItemDao">
+
+ <insert id="batchAddOrderItem">
+    <foreach collection="orderItems" item="item" index="index" open="" close="" separator=";">
+	    insert into `t_ys_firuits_order_item`
+	    (`goodsName`,`orderId`,`goodsId`,`goodsPrice`,`goodsCount`,`goodsTotalPrice`,`createTime`)
+	    values(#{item.goodsName},#{item.orderId},#{item.goodsId},#{item.goodsPrice},#{item.goodsCount},#{item.goodsTotalPrice},now())  
+	 </foreach>
+ 
+ </insert>
+	
+</mapper>

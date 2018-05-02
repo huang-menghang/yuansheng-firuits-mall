@@ -15,4 +15,6 @@ public interface MemberDao {
 	Integer updateNameAndMobileById(@Param(value="name")String name, @Param(value="mobile")String mobile, @Param(value="id")Long id);
 
 	void updatePasswordById(@Param(value="password")String password, @Param(value="id")Long id);
+
+	void updateAddressById(Member member);
 }

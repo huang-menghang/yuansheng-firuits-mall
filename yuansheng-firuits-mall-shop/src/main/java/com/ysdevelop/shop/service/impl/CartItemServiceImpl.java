@@ -64,4 +64,14 @@ public class CartItemServiceImpl implements CartItemService {
 
 	}
 
+	@Override
+	public List<CartItem> clearCartItem(List<Long> ids) {
+		if (ids == null || ids.size() == 0) {
+			throw new WebServiceException(CodeMsg.SERVER_ERROR);
+		}
+		cartItemDao.updateStatusBatchByIds(ids);
+		List<CartItem> cartItems = cartItemDao.listByIds(ids);
+		return cartItems;
+	}
+
 }

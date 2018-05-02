@@ -12,4 +12,8 @@ public interface CartItemService {
 	void updateStatusById(Long id);
 
 	void updateItemBatch(List<CartItem> items);
+
+	List<CartItem> clearCartItem(List<Long> ids);
+	
+	
 }

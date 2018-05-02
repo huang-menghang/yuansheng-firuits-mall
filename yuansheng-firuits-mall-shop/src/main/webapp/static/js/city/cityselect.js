@@ -16,7 +16,7 @@
             if(this.length<1){return;};  
             // 默认值    
             settings=$.extend({  
-                url:"../static/js/city/city.min.js",  
+                url:basePath+"static/js/city/city.min.js",  
                 prov:null,  
                 city:null,  
                 dist:null,  

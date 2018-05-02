@@ -15,7 +15,7 @@
    
    <select id="getByMobile" resultType="com.ysdevelop.shop.entity.Member">
     select 
-    `id`,`name`,`mobile`,`password`
+    `id`,`name`,`mobile`,`telephone`,`password`,`province`,`city`,`town`,`detailAddress`
     from `t_ys_firuits_mall_member`
     where `mobile` = #{mobile}
    </select>
@@ -46,6 +46,30 @@
     id = #{id}
    </where>
    
+   </update>
+   
+  
+   <update id="updateAddressById" parameterType="com.ysdevelop.shop.entity.Member">
+    update `t_ys_firuits_mall_member`
+   <trim prefix="SET" suffixOverrides="," suffix="WHERE id = #{id}" >  
+             <if test="city != null and city != '' ">  
+                   city = #{city},
+             </if>
+              <if test="province != null and province != '' ">  
+                   province = #{province},
+             </if>
+             <choose>
+             <when test="town != null and town != '' ">
+              town = #{town},
+             </when>
+             <otherwise>
+              town = null,
+             </otherwise>
+             </choose>
+             <if test="detailAddress != null and detailAddress != '' ">  
+                   detailAddress = #{detailAddress},
+             </if>
+          </trim>
    </update>
    
 </mapper>

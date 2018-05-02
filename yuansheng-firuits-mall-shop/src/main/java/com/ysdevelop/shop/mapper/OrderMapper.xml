@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysdevelop.shop.mapper.OrderDao">
+
+	<insert id="add" parameterType="com.ysdevelop.shop.entity.Order">
+		insert into `t_ys_firuits_order`
+		(`id`,`totalItemNo`,`totalItemCount`,`orderTotalPrice`,`orderDisbursement`,`memberProvince`,`memberCity`,`memberDist`,`orderDetailAddress`,`memberMobile`,`memberPhone`,`createTime`)
+		values(#{id},#{totalItemNo},#{totalItemCount},#{orderTotalPrice},#{orderDisbursement},#{memberProvince},#{memberCity},#{memberDist},#{orderDetailAddress},#{memberMobile},#{memberPhone},now())
+
+	</insert>
+
+	<select id="getOrderById" resultType="com.ysdevelop.shop.entity.Order">
+       select 
+       `id`,`orderTotalPrice`,`memberProvince`,`memberCity`,`memberDist`,`orderDetailAddress`,`memberMobile`,`memberPhone`
+       from `t_ys_firuits_order`
+       where id = #{orderId}
+	</select>
+	
+	<update id="updateAddress" parameterType="com.ysdevelop.shop.entity.Order">
+	 update `t_ys_firuits_order`
+	 <set>
+	 `memberProvince` = #{memberProvince},
+	 `memberCity` = #{memberCity},
+	  <choose>
+         <when test="memberDist != null and memberDist != '' ">
+              memberDist = #{memberDist},
+         </when>
+         <otherwise>
+              memberDist = null,
+         </otherwise>
+      </choose>
+	 `orderDetailAddress` = #{orderDetailAddress},
+	 `memberMobile` = #{memberMobile},
+	 `memberPhone` = #{memberPhone}
+	 </set>
+	 <where>
+	 id = #{id}
+	 </where>
+	</update>
+
+</mapper>

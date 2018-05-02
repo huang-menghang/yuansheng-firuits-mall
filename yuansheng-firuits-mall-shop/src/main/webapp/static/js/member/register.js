@@ -68,7 +68,7 @@ var member_register_ops = {
 							return;
 						}
 						$.ajax({
-							url : "../member/register",
+							url : basePath+"/member/register",
 							method : "POST",
 							type : "json",
 							data : {

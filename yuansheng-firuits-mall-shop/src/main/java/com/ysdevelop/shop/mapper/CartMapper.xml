@@ -19,7 +19,7 @@
 	  ifnull(sum(`item`.goodsCount),0) 
 	  from `t_ys_firuits_cart` as `c`
 	  left join `t_ys_firuits_cart_item` as `item` on `item`.cartId = `c`.id
-	  where `c`.id = #{id}
+	  where `c`.id = #{id} and `item`.status = 0
 	</select>
 
 </mapper>

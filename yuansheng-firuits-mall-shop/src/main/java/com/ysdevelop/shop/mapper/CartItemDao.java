@@ -21,5 +21,8 @@ public interface CartItemDao {
 	void updateStatusById(Long id);
 
 	void updateBatchByList(@Param(value="items")List<CartItem> items);
+
+	List<CartItem> listByIds(@Param(value="ids")List<Long> ids);
 	
+	void updateStatusBatchByIds(@Param(value="ids")List<Long> ids);
 }

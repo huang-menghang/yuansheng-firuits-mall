@@ -165,11 +165,26 @@ public class MemberController {
 
 	@RequestMapping(value = "/set/changePassword", method = RequestMethod.PUT)
 	@ResponseBody
-	public Result<String> changePassword(@LoginUser Member loginMember, String newPassword, String newConfirmPassword, String oldPassword,HttpSession session,@CookieValue(value="token")String token) {
-		String password = memberService.updatePasswordById(newPassword, newConfirmPassword, oldPassword, loginMember);	
+	public Result<String> changePassword(@LoginUser Member loginMember, String newPassword, String newConfirmPassword, String oldPassword, HttpSession session,
+			@CookieValue(value = "token") String token) {
+		String password = memberService.updatePasswordById(newPassword, newConfirmPassword, oldPassword, loginMember);
 		loginMember.setPassword(password);
 		memberService.refreshSessionMember(session, token, loginMember);
 		return Result.success("密码修改成功");
+	}
+
+	@RequestMapping(value = "/set/address", method = RequestMethod.GET)
+	public String address() {
+		return "member/address";
+	}
+
+	@RequestMapping(value = "/set/changeAddress", method = RequestMethod.PUT)
+	@ResponseBody
+	public Result<String> address(Member member, @LoginUser Member loginMember, HttpSession session,@CookieValue(value="token")String token) {
+		member.setId(loginMember.getId());
+		memberService.updateAddressById(member,loginMember);
+		memberService.refreshSessionMember(session, token, loginMember);
+		return Result.success("地址修改成功");
 	}
 
 }

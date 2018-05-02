@@ -111,7 +111,38 @@ var cart_index_ops = {
 				}
 				that.calculatePrice();
 				}	  
-			  );	
+			  );
+			 //添加订单
+			 $(".a_confirm_order").click(function(){
+				 var ids = [];
+				 var dd_doms = $(".check_item:checked");
+				 $.each(dd_doms,function(i,v){
+					 ids.push($(v).attr("itemId"));
+				 });
+
+				 $.ajax({
+					 url:basePath+"order/add",
+					 data:{ids:ids},
+					 method:"POST",
+					 type:"text/json",
+					 success:function(res){
+						var callback = null;
+						var msg = null
+					    if(res.code == 0){
+					    	callback = function(){
+					    		window.location.href = basePath+"order/confirm?orderId="+res.data;
+					    	};
+					    	msg = "订单生成成功";
+					    }else{
+					    	msg = res.msg;
+					    }
+					    common_ops.msg(msg,callback);
+					    
+					 }
+				 })
+//				 
+//				 window.location.href = basePath+"order/confirm";
+			 });
 		},
 		calculatePrice:function(){
 			var dom_dd = $(".cart-show").find("dd");
@@ -164,7 +195,7 @@ var cart_index_ops = {
         					$(".cart-empty").hide();
         					$(".cart dd").empty();
         					$.each(result.cartItems,function(i,v){
-        						$(".cart").append("<dd> <input type='checkbox' class='check_item'/>"+
+        						$(".cart").append("<dd> <input type='checkbox' itemId='"+v.id+"' class='check_item'/>"+
              "<a href='"+basePath+"goods/"+v.goodsId+"' class='goodsPic'> <img src='"+basePath+v.goodsImagePath+"'/></a>"+  
              "<div class='goodsInfor'>"+
              "<h2>"+
