@@ -25,4 +25,12 @@ public class OrderItemServiceImpl implements OrderItemService {
 
 	}
 
+	@Override
+	public List<OrderItem> listByOrderId(String orderId) {
+		if (orderId == null) {
+			throw new WebServiceException(CodeMsg.SERVER_ERROR);
+		}
+		return itemDao.listByOrderId(orderId);
+	}
+
 }

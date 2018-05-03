@@ -4,8 +4,8 @@
 
 	<insert id="add" parameterType="com.ysdevelop.shop.entity.Order">
 		insert into `t_ys_firuits_order`
-		(`id`,`totalItemNo`,`totalItemCount`,`orderTotalPrice`,`orderDisbursement`,`memberProvince`,`memberCity`,`memberDist`,`orderDetailAddress`,`memberMobile`,`memberPhone`,`createTime`)
-		values(#{id},#{totalItemNo},#{totalItemCount},#{orderTotalPrice},#{orderDisbursement},#{memberProvince},#{memberCity},#{memberDist},#{orderDetailAddress},#{memberMobile},#{memberPhone},now())
+		(`id`,`memberId`,`totalItemNo`,`totalItemCount`,`orderTotalPrice`,`orderDisbursement`,`memberProvince`,`memberCity`,`memberDist`,`orderDetailAddress`,`memberMobile`,`memberPhone`,`createTime`)
+		values(#{id},#{memberId},#{totalItemNo},#{totalItemCount},#{orderTotalPrice},#{orderDisbursement},#{memberProvince},#{memberCity},#{memberDist},#{orderDetailAddress},#{memberMobile},#{memberPhone},now())
 
 	</insert>
 
@@ -37,5 +37,21 @@
 	 id = #{id}
 	 </where>
 	</update>
+	
+	<select id="countByMemberIdAndStatus" resultType="java.lang.Integer">
+	 select count(`id`)
+	 from `t_ys_firuits_order`
+	 where memberId = #{memberId} and orderStatus = #{orderStatus}
+	</select>
+	
+	<select id="listByStatusAndMemberId" resultType="com.ysdevelop.shop.entity.Order">
+	 select
+	 id,orderTotalPrice,totalItemNo,orderStatus
+	 from `t_ys_firuits_order`
+	 where memberId = #{memberId} and orderStatus = #{orderStatus}
+	 limit #{pagination.start},#{pagination.pageSize}
+	</select>
+	
+	
 
 </mapper>

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ysdevelop.common.page.Pagination;
 import com.ysdevelop.common.result.Result;
+import com.ysdevelop.common.utils.JSONHelper;
 import com.ysdevelop.shop.annotation.LoginUser;
 import com.ysdevelop.shop.entity.Member;
 import com.ysdevelop.shop.entity.Order;
@@ -38,8 +40,9 @@ public class OrderController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Result<Long> add(@RequestParam(value = "ids[]") List<Long> ids, @LoginUser Member loginMember) {
-		Long orderId = orderService.add(loginMember, ids);
+	public Result<String> add(@RequestParam(value = "ids[]") List<Long> ids, @LoginUser Member loginMember) {
+		String orderId = orderService.add(loginMember, ids);
+		System.out.println("返回orderId"+orderId);
 		return Result.successData(orderId);
 	}
 
@@ -47,6 +50,9 @@ public class OrderController {
 	@ResponseBody
 	public Result<Order> info(@PathVariable(value = "id") Long orderId, @LoginUser Member loginMember) {
 		Order order = orderService.getOrderById(orderId);
+		System.out.println(loginMember);
+		System.out.println(loginMember.getName());
+		System.out.println(order);
 		order.setMemberName(loginMember.getName());
 		return Result.successData(order);
 	}
@@ -61,5 +67,24 @@ public class OrderController {
 		}
 		return Result.success("修改成功");
 	}
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list(@LoginUser Member loginMember) {
+		return "order/order_list";
+	}
+	
+	@RequestMapping(value = "/list/query", method = RequestMethod.GET)
+	@ResponseBody
+	public Result<String> doList(Integer orderStatus,Pagination<Order> pagination,@LoginUser Member loginMember) {
+		pagination.setPageSize(3);
+		orderService.pagination(orderStatus, loginMember.getId(),pagination);
+		for(Order order:pagination.getItems()){
+			System.out.println(order.getId());
+		}
+		
+		return Result.successData(JSONHelper.bean2json(pagination));
+	}
+	
+	
 
 }

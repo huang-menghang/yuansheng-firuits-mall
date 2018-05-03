@@ -38,7 +38,11 @@ var order_confirm_ops ={
 		
 		$(".confirmAddr a").click(function(){
 			window.location.href = basePath+"order/newAddress?orderId="+common_ops.g_getQueryString("orderId");
-		})
+		});
+		
+		$(".backIcon").click(function(){
+			window.location.href = basePath+"order/list";
+		});
 	}
 }
 $(function(){

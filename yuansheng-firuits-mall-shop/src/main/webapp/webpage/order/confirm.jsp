@@ -10,7 +10,7 @@
 <body>
 <!--header-->
 <header>
- <a onclick="goOrderList()" class="iconfont backIcon">&#60;</a>
+ <a class="iconfont backIcon">&#60;</a>
  <h1>确认订单</h1>
 </header>
 <div style="height:1rem;"></div>

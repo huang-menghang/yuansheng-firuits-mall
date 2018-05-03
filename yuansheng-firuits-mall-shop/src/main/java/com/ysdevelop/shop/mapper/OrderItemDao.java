@@ -8,4 +8,6 @@ import com.ysdevelop.shop.entity.OrderItem;
 
 public interface OrderItemDao {
 	void batchAddOrderItem(@Param(value = "orderItems") List<OrderItem> orderItems);
+
+	List<OrderItem> listByOrderId(String orderId);
 }

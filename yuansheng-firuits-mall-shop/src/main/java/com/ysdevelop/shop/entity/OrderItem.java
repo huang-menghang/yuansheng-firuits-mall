@@ -13,7 +13,7 @@ public class OrderItem extends BaseEntity {
 
 	private Double goodsPrice;
 
-	private Long orderId;
+	private String orderId;
 
 	public Long getGoodsId() {
 		return goodsId;
@@ -56,11 +56,11 @@ public class OrderItem extends BaseEntity {
 	}
 
 
-	public Long getOrderId() {
+	public String getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(Long orderId) {
+	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
 	

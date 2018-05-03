@@ -6,14 +6,19 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.ysdevelop.common.entity.BaseEntity;
 import com.ysdevelop.common.validate.IsMobile;
 import com.ysdevelop.common.validate.IsTelephone;
 
-public class Order extends BaseEntity {
+public class Order {
+
+	private String id;
+
+	private Date createTime;
+
+	private Date updateTime;
 
 	// 订单用户id
-	private Integer memberId;
+	private Long memberId;
 	// 订单的用户名
 	private String memberName;
 	// 用户订单列表
@@ -48,11 +53,35 @@ public class Order extends BaseEntity {
 	// 0-支付宝 1-微信
 	private Integer orderPayment;
 
-	public Integer getMemberId() {
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public Long getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(Integer memberId) {
+	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
 	}
 

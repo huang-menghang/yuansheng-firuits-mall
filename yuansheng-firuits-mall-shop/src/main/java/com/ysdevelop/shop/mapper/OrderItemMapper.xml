@@ -10,5 +10,11 @@
 	 </foreach>
  
  </insert>
-	
+
+ <select id="listByOrderId" resultType="com.ysdevelop.shop.entity.OrderItem">
+  select
+  `goodsName`,`goodsTotalPrice`,`goodsCount`
+  from `t_ys_firuits_order_item`
+  where orderId = #{orderId}
+ </select>	
 </mapper>

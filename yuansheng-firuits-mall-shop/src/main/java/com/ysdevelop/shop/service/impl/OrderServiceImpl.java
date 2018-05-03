@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ysdevelop.common.exception.WebServiceException;
+import com.ysdevelop.common.page.Pagination;
 import com.ysdevelop.common.result.CodeMsg;
 import com.ysdevelop.common.utils.NumberArithmeticUtils;
 import com.ysdevelop.common.utils.OrderNumberGeneratorUtil;
@@ -34,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderItemService orderItemService;
-	
+
 	@Autowired
 	private MemberService memberService;
 
@@ -43,7 +44,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Transactional
 	@Override
-	public Long add(Member loginMember, List<Long> ids) {
+	public String add(Member loginMember, List<Long> ids) {
 		// 第一步把CartItem 选中找出来,把这个状态改成已经清空
 		if (ids == null || ids.size() == 0) {
 			throw new WebServiceException(CodeMsg.SERVER_ERROR);
@@ -57,7 +58,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		List<OrderItem> orderItems = new ArrayList<>();
 		CartItem cartItem = null;
-		Long orderId = OrderNumberGeneratorUtil.get();
+		String orderId = ""+OrderNumberGeneratorUtil.get();
 		for (int i = 0; i < cartItems.size(); i++) {
 			cartItem = cartItems.get(i);
 			if (cartItem != null) {
@@ -74,6 +75,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		// 将订单条目添加到订单条目表中
 		Order order = new Order();
+		order.setMemberId(loginMember.getId());
 		order.setId(orderId);
 		order.setMemberProvince(loginMember.getProvince());
 		order.setMemberCity(loginMember.getCity());
@@ -85,7 +87,9 @@ public class OrderServiceImpl implements OrderService {
 		generateOrder(order, orderItems);
 		orderDao.add(order);
 		orderItemService.addBatchOrderItem(orderItems);
-		return orderId;
+		System.out.println("订单"+orderId);
+		System.out.println("订单:"+order.getId());
+		return order.getId();
 	}
 
 	private void generateOrder(Order order, List<OrderItem> orderItems) {
@@ -117,15 +121,15 @@ public class OrderServiceImpl implements OrderService {
 		Order order = orderDao.getOrderById(orderId);
 		return order;
 	}
-    
+
 	@Transactional
 	@Override
-	public void changeAddress(Order order, Boolean defaultAddress,Member loginMember) {
-        if(order == null || loginMember == null){
-        	throw new WebServiceException(CodeMsg.SERVER_ERROR);
-        }
+	public void changeAddress(Order order, Boolean defaultAddress, Member loginMember) {
+		if (order == null || loginMember == null) {
+			throw new WebServiceException(CodeMsg.SERVER_ERROR);
+		}
 		orderDao.updateAddress(order);
-		if(defaultAddress){
+		if (defaultAddress) {
 			Member member = new Member();
 			member.setProvince(order.getMemberProvince());
 			member.setCity(order.getMemberCity());
@@ -140,8 +144,26 @@ public class OrderServiceImpl implements OrderService {
 			loginMember.setTown(member.getTown());
 			loginMember.setDetailAddress(member.getDetailAddress());
 		}
-		
-		
+
+	}
+
+	// 根据我们的订单状态进行查询
+	@Override
+	public void pagination(Integer orderStatus, Long memberId, Pagination<Order> pagination) {
+		// 先查出所有的订单,再根据订单的id去找查找它的订单条目
+		if (orderStatus == null || memberId == null) {
+			throw new WebServiceException(CodeMsg.SERVER_ERROR);
+		}
+
+		Integer orderCount = orderDao.countByMemberIdAndStatus(memberId, orderStatus);
+		pagination.setTotalItemsCount(orderCount);
+		List<Order> orders = orderDao.listByStatusAndMemberId(memberId, orderStatus, pagination);
+		for (Order order : orders) {
+			List<OrderItem> orderItems = orderItemService.listByOrderId(order.getId());
+			order.setOrderItems(orderItems);
+		}
+		pagination.setItems(orders);
+
 	}
 
 }

@@ -130,7 +130,8 @@ var cart_index_ops = {
 						var msg = null
 					    if(res.code == 0){
 					    	callback = function(){
-					    		window.location.href = basePath+"order/confirm?orderId="+res.data;
+					    		 console.log(res.data);
+					    		//window.location.href = basePath+"order/confirm?orderId="+res.data;
 					    	};
 					    	msg = "订单生成成功";
 					    }else{

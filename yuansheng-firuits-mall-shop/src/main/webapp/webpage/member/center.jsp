@@ -20,7 +20,7 @@
  <h2>${sessionScope.customer.customerPetName}</h2>
 </div>
 <ul class="userList">
- <li><a href="<%=basePath %>userCenter/myOrderList.jspa" class="orderListIcon">我的订单</a></li>
+ <li><a href="<%=basePath %>order/list" class="orderListIcon">我的订单</a></li>
  <li><a href="<%=basePath %>userCenter/paginationEntityFavourite.jspa" class="collectionIcon">常购清单</a></li>
  <li><a href="<%=basePath %>member/profile" class="profileIcon">个人资料</a></li>
 </ul>
