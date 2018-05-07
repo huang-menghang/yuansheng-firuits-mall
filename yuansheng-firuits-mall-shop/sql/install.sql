@@ -122,20 +122,21 @@ CREATE TABLE `t_ys_firuits_order_item` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `t_ys_firuits_order`;
 CREATE TABLE `t_ys_firuits_order` (
-  `id` int(11) NOT NULL COMMENT '购物车条目id', 
+  `id` varchar(32) NOT NULL COMMENT '购物车条目id',
   `totalItemNo` int(3) NOT NULL COMMENT '总的的商品数',
-  `totalItemCount` int(3) NULL COMMENT '总的订单数',
-  `orderTotalPrice` double(8,2)  NOT NULL COMMENT '总的价格',
-  `orderDisbursement` double(8,2)  NOT NULL COMMENT '商品实付款',
-  `memberProvince`  varchar(6) NOT NULL COMMENT '订单省',
-  `memberCity`  varchar(6) NOT NULL COMMENT '订单市',
-  `memberDist`  varchar(6) NOT NULL COMMENT '订单区/县',
-  `orderDetailAddress`  varchar(32) NOT NULL COMMENT '详细地址',
-  `memberMobile`  varchar(11) NOT NULL COMMENT '手机号码',
-  `memberPhone`  varchar(13) NOT NULL COMMENT '电话号码',
+  `totalItemCount` int(3) DEFAULT NULL COMMENT '总的订单数',
+  `memberId` int(8) DEFAULT NULL,
+  `orderStatus` tinyint(1) NOT NULL DEFAULT '0',
+  `orderTotalPrice` double(8,2) NOT NULL COMMENT '总的价格',
+  `orderDisbursement` double(8,2) DEFAULT NULL COMMENT '商品实付款',
+  `memberProvince` varchar(6) NOT NULL COMMENT '订单省',
+  `memberCity` varchar(6) NOT NULL COMMENT '订单市',
+  `memberDist` varchar(6) DEFAULT NULL COMMENT '订单区/县',
+  `orderDetailAddress` varchar(32) NOT NULL COMMENT '详细地址',
+  `memberMobile` varchar(11) NOT NULL COMMENT '手机号码',
+  `memberPhone` varchar(13) NOT NULL COMMENT '电话号码',
   `createTime` timestamp NULL DEFAULT NULL COMMENT '创健日期',
   `updateTime` timestamp NULL DEFAULT NULL COMMENT '修改日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

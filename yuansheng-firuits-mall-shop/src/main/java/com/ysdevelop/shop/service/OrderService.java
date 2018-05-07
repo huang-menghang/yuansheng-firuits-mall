@@ -14,4 +14,6 @@ public interface OrderService {
 	void changeAddress(Order order, Boolean defaultAddress, Member loginMember);
 
 	void pagination(Integer orderStatus, Long memberId, Pagination<Order> pagination);
+
+	void updateStatusById(String orderId, Integer status);
 }

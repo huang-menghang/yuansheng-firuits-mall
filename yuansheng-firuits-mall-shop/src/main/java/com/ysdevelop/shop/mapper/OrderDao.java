@@ -17,4 +17,6 @@ public interface OrderDao {
 	Integer countByMemberIdAndStatus(@Param(value="memberId")Long memberId, @Param(value="orderStatus")Integer orderStatus);
 
 	List<Order> listByStatusAndMemberId(@Param(value="memberId")Long memberId, @Param(value="orderStatus")Integer orderStatus, @Param(value="pagination")Pagination<Order> pagination);
+
+	void updateStatusByOrderId(@Param(value="orderId")String orderId, @Param(value="status")Integer status);
 }

@@ -24,6 +24,10 @@ public class CodeMsg {
 	public static CodeMsg OLDPASSWORD_WRONG =  new CodeMsg(500009,"旧密码输入错误");
 	public static CodeMsg NEWOLDPASSWOR_SAME =  new CodeMsg(500010,"新旧密码一致");
 	
+	// 支付
+	public static CodeMsg PAY_ERROR = new CodeMsg(500100,"支付异常");
+
+	
 	private CodeMsg(int code, String msg) {
 		this.code = code;
 		this.msg = msg;

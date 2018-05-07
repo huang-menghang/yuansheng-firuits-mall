@@ -58,7 +58,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		List<OrderItem> orderItems = new ArrayList<>();
 		CartItem cartItem = null;
-		String orderId = ""+OrderNumberGeneratorUtil.get();
+		String orderId = "" + OrderNumberGeneratorUtil.get();
 		for (int i = 0; i < cartItems.size(); i++) {
 			cartItem = cartItems.get(i);
 			if (cartItem != null) {
@@ -87,8 +87,8 @@ public class OrderServiceImpl implements OrderService {
 		generateOrder(order, orderItems);
 		orderDao.add(order);
 		orderItemService.addBatchOrderItem(orderItems);
-		System.out.println("订单"+orderId);
-		System.out.println("订单:"+order.getId());
+		System.out.println("订单" + orderId);
+		System.out.println("订单:" + order.getId());
 		return order.getId();
 	}
 
@@ -163,6 +163,16 @@ public class OrderServiceImpl implements OrderService {
 			order.setOrderItems(orderItems);
 		}
 		pagination.setItems(orders);
+
+	}
+
+	@Transactional
+	@Override
+	public void updateStatusById(String orderId, Integer status) {
+       if(orderId == null || status == null){
+    	   throw new WebServiceException(CodeMsg.SERVER_ERROR);
+       }
+		orderDao.updateStatusByOrderId(orderId, status);
 
 	}
 

@@ -25,8 +25,8 @@
 <dl class="payment">
  <dt>选择支付方式</dt>
  <dd>
-  <label><input type="radio" name="pay"/>支付宝支付</label>
-  <label><input type="radio" name="pay"/>微信支付</label>
+  <label><input type="radio" value="ali-pay" name="pay"/>支付宝支付</label>
+  <label><input type="radio" value="weixin-pay" name="pay"/>微信支付</label>
  </dd>
 </dl>
 <section class="order_msg">
@@ -37,7 +37,7 @@
 <div style="height:1rem;"></div>
 <aside class="btmNav">
  <a class="order-total-price" style="background:#64ab5b;color:white;text-shadow:none;"></a>
- <a style="background:#6bc75f;color:white;text-shadow:none;">提交订单</a>
+ <a style="background:#6bc75f;color:white;text-shadow:none;" class="pay">提交订单</a>
 </aside>
 <jsp:include page="/context/js-tags.jsp"/>
 <script src="<%=basePath%>static/js/order/confirm.js" type="text/javascript"></script>

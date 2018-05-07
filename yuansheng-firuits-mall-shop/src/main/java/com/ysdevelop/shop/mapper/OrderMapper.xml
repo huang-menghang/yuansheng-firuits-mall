@@ -10,48 +10,60 @@
 	</insert>
 
 	<select id="getOrderById" resultType="com.ysdevelop.shop.entity.Order">
-       select 
-       `id`,`orderTotalPrice`,`memberProvince`,`memberCity`,`memberDist`,`orderDetailAddress`,`memberMobile`,`memberPhone`
-       from `t_ys_firuits_order`
-       where id = #{orderId}
+		select
+		`id`,`orderTotalPrice`,`memberProvince`,`memberCity`,`memberDist`,`orderDetailAddress`,`memberMobile`,`memberPhone`
+		from `t_ys_firuits_order`
+		where id = #{orderId}
 	</select>
-	
+
 	<update id="updateAddress" parameterType="com.ysdevelop.shop.entity.Order">
-	 update `t_ys_firuits_order`
-	 <set>
-	 `memberProvince` = #{memberProvince},
-	 `memberCity` = #{memberCity},
-	  <choose>
-         <when test="memberDist != null and memberDist != '' ">
-              memberDist = #{memberDist},
-         </when>
-         <otherwise>
-              memberDist = null,
-         </otherwise>
-      </choose>
-	 `orderDetailAddress` = #{orderDetailAddress},
-	 `memberMobile` = #{memberMobile},
-	 `memberPhone` = #{memberPhone}
-	 </set>
-	 <where>
-	 id = #{id}
-	 </where>
+		update `t_ys_firuits_order`
+		<set>
+			`memberProvince` = #{memberProvince},
+			`memberCity` = #{memberCity},
+			<choose>
+				<when test="memberDist != null and memberDist != '' ">
+					memberDist = #{memberDist},
+				</when>
+				<otherwise>
+					memberDist = null,
+				</otherwise>
+			</choose>
+			`orderDetailAddress` = #{orderDetailAddress},
+			`memberMobile` =
+			#{memberMobile},
+			`memberPhone` = #{memberPhone}
+		</set>
+		<where>
+			id = #{id}
+		</where>
 	</update>
-	
+
 	<select id="countByMemberIdAndStatus" resultType="java.lang.Integer">
-	 select count(`id`)
-	 from `t_ys_firuits_order`
-	 where memberId = #{memberId} and orderStatus = #{orderStatus}
+		select
+		count(`id`)
+		from `t_ys_firuits_order`
+		where memberId = #{memberId} and
+		orderStatus = #{orderStatus}
 	</select>
-	
+
 	<select id="listByStatusAndMemberId" resultType="com.ysdevelop.shop.entity.Order">
-	 select
-	 id,orderTotalPrice,totalItemNo,orderStatus
-	 from `t_ys_firuits_order`
-	 where memberId = #{memberId} and orderStatus = #{orderStatus}
-	 limit #{pagination.start},#{pagination.pageSize}
+		select
+		id,orderTotalPrice,totalItemNo,orderStatus
+		from `t_ys_firuits_order`
+		where memberId = #{memberId} and orderStatus = #{orderStatus}
+		limit
+		#{pagination.start},#{pagination.pageSize}
 	</select>
-	
-	
+
+	<update id="updateStatusByOrderId">
+		update `t_ys_firuits_order`
+		<set>
+			orderStatus = #{status}
+		</set>
+		<where>
+			id = #{orderId}
+		</where>
+	</update>
 
 </mapper>

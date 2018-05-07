@@ -10,6 +10,7 @@
 		<module>yuansheng-firuits-mall-admin</module>
 		<module>yuansheng-firuits-mall-shop</module>
 		<module>yuansheng-firuits-mall-api</module>
+		<module>yuansheng-firuits-mall-pay</module>
 	</modules>
 	<properties>
 		<!-- spring版本号 -->
@@ -304,11 +305,17 @@
 			<artifactId>httpcore</artifactId>
 			<version>${httpcore.version}</version>
 		</dependency>
-	    <!-- guava-18.0.ar,用于高精度计算 -->
+		<!-- guava-18.0.ar,用于高精度计算 -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>18.0</version>
+		</dependency>
+		<!-- ali-pay -->
+		<dependency>
+			<groupId>com.alipay.sdk</groupId>
+			<artifactId>alipay-sdk-java</artifactId>
+			<version>3.0.0</version>
 		</dependency>
 	</dependencies>
 	<build>

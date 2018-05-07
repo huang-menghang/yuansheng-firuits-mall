@@ -2,6 +2,8 @@
 pageNum = 1;
 //订单状态
 orderStatus = 0;
+//正在加载
+isLoadMore = false;
 var order_list_ops = {
 	init:function(){
 		this.getOrder();
@@ -16,6 +18,13 @@ var order_list_ops = {
 			that.getOrder();
 		});
 		$(".productList").click(function(){
+			if(isLoadMore){
+				common_ops.msg("正在加载");
+				return ;
+			}
+			console.log(isLoadMore);
+			isLoadMore = true;
+			console.log(isLoadMore);
 			that.getOrder();
 		});
 		$(".orderList").on("click",".order_payBtn",function(e){
@@ -90,12 +99,18 @@ var order_list_ops = {
 				    	   $(".productList").show();
 				    	   pageNum++;
 				       }
+				       isLoadMore = false; 
 					
 				}	
+				else{
+					 isLoadMore = false; 
+				}
 			}
 			
 		});
+		
 	}
+	
 };
 $(function(){
 	order_list_ops.init();
