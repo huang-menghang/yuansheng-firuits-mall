@@ -63,11 +63,24 @@ var order_list_ops = {
 							    "<a class='order_delBtn' orderId='"+v.id+"'>删除订单</a>"+
 							    "<a class='order_payBtn' orderId='"+v.id+"'>付款</a>"+
 							   "</dd>");
-						}else{
+						}else if(orderStatus == 1){
 						  orderOps+= ("<dd>"+
+								    "<a class='order_refundBtn' orderId='"+v.id+"'>退款</a>"+
 								    "<a class='order_delBtn' orderId='"+v.id+"'>删除订单</a>"+
 								   "</dd>");
-						}		
+						}	
+						else if(orderStatus == 2){
+							  orderOps+= ("<dd>"+
+									    "<a class='order_confirmBtn' orderId='"+v.id+"'>确认收货</a>"+
+									    "<a class='order_delBtn' orderId='"+v.id+"'>删除订单</a>"+
+									   "</dd>");
+						}else {
+							  orderOps+= ("<dd>"+
+									    "<a>完成</a>"+
+									    "<a class='order_delBtn' orderId='"+v.id+"'>删除订单</a>"+
+									   "</dd>");
+						}	
+						
 						$.each(v.orderItems,function(vi,vv){
 							orderItems += ("<dd>"+
 						    "<h2>"+vv.goodsName+"</h2>"+

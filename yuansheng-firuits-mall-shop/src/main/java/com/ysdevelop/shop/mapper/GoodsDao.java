@@ -16,4 +16,8 @@ public interface GoodsDao {
 	Integer countByQueryMap(@Param(value="queryMap")Map<String, Object> queryMap);
 
 	List<Goods> listByQueryMap(@Param(value="queryMap")Map<String, Object> queryMap,@Param(value="pagination") Pagination<Goods> pagination);
+
+	Integer countGoodsFavByMemberId(Long memberId);
+
+	List<Goods> listGoodsFavByMemberId(@Param(value="memberId")Long memberId, @Param(value="pagination")Pagination<Goods> pagination);
 }

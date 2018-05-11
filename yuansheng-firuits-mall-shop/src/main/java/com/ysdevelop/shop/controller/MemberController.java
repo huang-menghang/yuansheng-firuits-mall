@@ -1,5 +1,7 @@
 package com.ysdevelop.shop.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,14 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ysdevelop.common.page.Pagination;
 import com.ysdevelop.common.result.Result;
 import com.ysdevelop.common.utils.Constant;
 import com.ysdevelop.common.utils.HttpUtils;
 import com.ysdevelop.common.utils.JSONHelper;
 import com.ysdevelop.shop.annotation.IgnoreAuth;
 import com.ysdevelop.shop.annotation.LoginUser;
+import com.ysdevelop.shop.entity.Goods;
 import com.ysdevelop.shop.entity.Member;
 import com.ysdevelop.shop.service.CartService;
+import com.ysdevelop.shop.service.GoodsService;
 import com.ysdevelop.shop.service.MemberService;
 import com.ysdevelop.shop.vo.LoginVo;
 
@@ -31,6 +36,9 @@ public class MemberController {
 
 	@Autowired
 	private CartService cartService;
+	
+	@Autowired
+	private GoodsService goodsService;
 
 	@IgnoreAuth
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -180,11 +188,23 @@ public class MemberController {
 
 	@RequestMapping(value = "/set/changeAddress", method = RequestMethod.PUT)
 	@ResponseBody
-	public Result<String> address(Member member, @LoginUser Member loginMember, HttpSession session,@CookieValue(value="token")String token) {
+	public Result<String> address(Member member, @LoginUser Member loginMember, HttpSession session, @CookieValue(value = "token") String token) {
 		member.setId(loginMember.getId());
-		memberService.updateAddressById(member,loginMember);
+		memberService.updateAddressById(member, loginMember);
 		memberService.refreshSessionMember(session, token, loginMember);
 		return Result.success("地址修改成功");
 	}
 
+	@RequestMapping(value = "/favor/list", method = RequestMethod.GET)
+	public String favor() {
+		return "member/favorite";
+	}
+
+	@RequestMapping(value = "/favor", method = RequestMethod.GET)
+	@ResponseBody
+	public Result<String> doFavor(@LoginUser Member loginMember,Pagination<Goods> pagination) {
+		pagination.setPageSize(3);
+		goodsService.paginationFavorByMemeberId(pagination,loginMember.getId());
+		return Result.successData(JSONHelper.bean2json(pagination));
+	}
 }

@@ -13,4 +13,6 @@ public interface GoodsService {
 	Goods getById(Long id);
 
 	Pagination<Goods> pagination(Map<String, Object> queryMap, Pagination<Goods> pagination);
+
+	void paginationFavorByMemeberId(Pagination<Goods> pagination, Long memberId);
 }

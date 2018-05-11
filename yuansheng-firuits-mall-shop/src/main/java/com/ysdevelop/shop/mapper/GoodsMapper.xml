@@ -123,6 +123,27 @@
        limit #{pagination.start},#{pagination.pageSize}
     
     </select>
+    
+    <select id="countGoodsFavByMemberId" resultType="java.lang.Integer">
+     select count(`f`.id)
+     from `t_ys_firuits_goods` as `g`
+     left join  `t_ys_firuits_member_fav` as `f` on `f`.goodsId = `g`.id
+     where `f`.memberId = #{memberId}
+    </select>
+    
+    <select id="listGoodsFavByMemberId" resultType="com.ysdevelop.shop.entity.Goods">
+       SELECT
+      `g`.id as `id`,
+      `g`.name as `name`,
+      `g`.discoutPrice as `discoutPrice`,
+      `g`.price as `price`,
+      `g`.imagePath as `imagePath`
+       FROM `t_ys_firuits_goods` as `g`
+       left join  `t_ys_firuits_member_fav` as `f` on `f`.goodsId = `g`.id
+       where `f`.memberId = #{memberId}
+       limit #{pagination.start},#{pagination.pageSize}
+    </select>
+    
 
 
 </mapper>

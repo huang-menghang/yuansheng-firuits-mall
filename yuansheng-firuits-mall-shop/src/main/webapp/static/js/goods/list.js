@@ -172,12 +172,12 @@ var goods_list_ops = {
 							$("#ul_productList").empty();
 							}
 							$.each(data.items,function(i,v){
-								$("#ul_productList").append("<li><a href='"+basePath+"goods/"+v.id+"'"+
+								$("#ul_productList").append("<li><a href='"+basePath+"goods/info/"+v.id+"'"+
 									" class='goodsPic'> <img src='"+basePath+v.imagePath+"' />"+
 									"</a>"+
 										"<div class='goodsInfor'>"+
 											"<h2>"+
-										    "<a href='"+basePath+"goods/"+v.id+"'>"+v.name+"</a>"+
+										    "<a href='"+basePath+"goods/info/"+v.id+"'>"+v.name+"</a>"+
 											"</h2>"+
 											"<p>"+
 											"<del>"+v.price+"</del>"+

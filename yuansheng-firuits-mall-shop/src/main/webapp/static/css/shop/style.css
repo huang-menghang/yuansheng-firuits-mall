@@ -277,6 +277,8 @@ nav .userIcon:before{content:"U";}
 .orderList li dd:last-child a{display:inline-block;width:2rem;height:.75rem;text-align:center;line-height:.75rem;margin-left:.15rem;font-size:.32rem;border-radius:2px;}
 .orderList li dd:last-child .order_delBtn{background:white;border:1px #333 solid;color:#333;}
 .orderList li dd:last-child .order_payBtn{background:#0c0;border:1px #0c0 solid;color:white;}
+.orderList li dd:last-child .order_refundBtn{background:#0c0;border:1px #0c0 solid;color:white;}
+.orderList li dd:last-child .order_confirmBtn{background:#0c0;border:1px #0c0 solid;color:white;}
 .orderList li dd h2{float:left;width:60%;margin:0;color:#666;}
 .orderList li dd strong{float:right;display:block;text-align:right;font-weight:normal;}
 .orderList li dd strong em{font-style:normal;display:block;color:#666;}
