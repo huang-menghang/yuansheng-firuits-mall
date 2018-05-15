@@ -8,5 +8,7 @@
 %>
 <input type="hidden" name="basePath" value="<%=basePath%>" />
 <script type="text/javascript" src="<%=basePath%>static/js/plugin/jquery/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src="<%=basePath%>static/js/plugin/layer/layer.js"></script>
 <script type="text/javascript" src="<%=basePath%>static/js/plugin/common/common.js"></script>
+<script type="text/javascript" src="<%=basePath %>static/plugin/layui/layui.js"></script>
+<script type="text/javascript" src="<%=basePath %>static/js/plugin/index/index.js"></script>
+

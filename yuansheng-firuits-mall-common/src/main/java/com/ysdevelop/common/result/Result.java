@@ -16,56 +16,68 @@ package com.ysdevelop.common.result;
 public class Result<T> {
 	private int code;
 	private String msg;
+	// layui 分页需要返回一个总的记录数(总的条目数)
+	private int count;
 	private T data;
-	
+
 	/**
-	 *  成功时候的调用
+	 * 成功时候的调用
 	 * */
-	public static  <T> Result<T> success(String msg){
+	public static <T> Result<T> success(String msg) {
 		return new Result<T>(msg);
 	}
-	
+
 	/**
-	 *  成功时候的调用,data设置
+	 * 成功时候的调用,data设置
 	 * */
-	public static  <T> Result<T> successData(T data){
+	public static <T> Result<T> successData(T data) {
 		return new Result<T>(data);
 	}
-	
+
 	/**
-	 *  失败时候的调用
+	 * 成功时候的调用,data设置
 	 * */
-	public static  <T> Result<T> error(CodeMsg codeMsg){
+	public static <T> Result<T> successPaginationData(T data, Integer count) {
+		return new Result<T>("操作成功", data, count);
+	}
+
+	/**
+	 * 失败时候的调用
+	 * */
+	public static <T> Result<T> error(CodeMsg codeMsg) {
 		return new Result<T>(codeMsg);
 	}
-	
-	private Result(){
-		
+
+	private Result() {
+
 	}
-	
+
 	private Result(int code, String msg, T data) {
 		this.code = code;
 		this.msg = msg;
 		this.data = data;
 	}
-	
-		
+
+	private Result(String msg, T data, Integer count) {
+		this.data = data;
+		this.msg = msg;
+		this.count = count;
+	}
+
 	private Result(T data) {
 		this.data = data;
 	}
-	
-	private Result(String msg){
+
+	private Result(String msg) {
 		this.msg = msg;
 	}
-	
-	
-	private Result(CodeMsg codeMsg){
-		if(codeMsg!=null){
+
+	private Result(CodeMsg codeMsg) {
+		if (codeMsg != null) {
 			this.code = codeMsg.getCode();
 			this.msg = codeMsg.getMsg();
 		}
 	}
-	
 
 	public int getCode() {
 		return code;
@@ -83,21 +95,20 @@ public class Result<T> {
 		this.msg = msg;
 	}
 
-
 	public T getData() {
 		return data;
 	}
-
 
 	public void setData(T data) {
 		this.data = data;
 	}
 
-	
-	
-	
+	public int getCount() {
+		return count;
+	}
 
-	
-	
-	
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 }

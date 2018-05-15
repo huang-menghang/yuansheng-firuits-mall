@@ -2,6 +2,8 @@ package com.ysdevelop.common.utils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -212,4 +214,33 @@ public class HttpUtils {
 		return value;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static Map<String,String> getParameterMap(HttpServletRequest request) {
+		// 参数Map
+		Map properties = request.getParameterMap();
+		// 返回值Map
+		Map returnMap = new HashMap();
+		Iterator entries = properties.entrySet().iterator();
+		Map.Entry entry;
+		String name = "";
+		String value = "";
+		while (entries.hasNext()) {
+			entry = (Map.Entry) entries.next();
+			name = (String) entry.getKey();
+			Object valueObj = entry.getValue();
+			if (null == valueObj) {
+				value = "";
+			} else if (valueObj instanceof String[]) {
+				String[] values = (String[]) valueObj;
+				for (int i = 0; i < values.length; i++) {
+					value = values[i] + ",";
+				}
+				value = HttpUtils.getRequestParamterUtf8(value.substring(0, value.length() - 1));
+			} else {
+				value = HttpUtils.getRequestParamterUtf8(valueObj.toString());
+			}
+			returnMap.put(name, value);
+		}
+		return returnMap;
+	}
 }

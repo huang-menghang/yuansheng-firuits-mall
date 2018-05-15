@@ -2,16 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@include file="/context/begin-tags.jsp"%>     
 <!DOCTYPE html>
-<html lang="en">
+<html >
 <head>
-    <meta charset="UTF-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <jsp:include page="/context/css-tags.jsp"/>
     <title>首页 </title>
-    <link rel="stylesheet" href="<%=basePath %>static/plugin/layui/css/layui.css">
-    <link rel="stylesheet" href="<%=basePath %>static/css/style.css">
-    <link rel="icon" href="<%=basePath %>static/images/code.png">
 <body>
 
 <!-- layout admin -->
@@ -39,7 +33,7 @@
                 </dl>
             </li>
             <li class="layui-nav-item">
-                <a class="name" href="javascript:;"><img src="./frame/static/image/code.png" alt="logo"> Admin </a>
+                <a class="name" href="javascript:;"><img src="<%=basePath %>static/images/code.png" alt="logo"> Admin </a>
                 <dl class="layui-nav-child">
                     <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe621;</i>登录页</a></dd>
                     <dd><a href="javascript:;" href-url="demo/map.html"><i class="layui-icon">&#xe621;</i>图表</a></dd>
@@ -54,7 +48,8 @@
         <div class="layui-side-scroll">
             <!-- 左侧主菜单添加选项卡监听 -->
             <ul class="layui-nav layui-nav-tree" lay-filter="side-main">
-                <li class="layui-nav-item layui-nav-itemed"> 
+                <!-- layui-nav-itemed 表示选中 -->
+                <li class="layui-nav-item "> 
                     <a href="javascript:;"><i class="layui-icon">&#xe620;</i>商品管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" href-url="demo/btn.html"><i class="layui-icon">&#xe621;</i>品牌列表</a></dd>
@@ -66,7 +61,7 @@
                 <li class="layui-nav-item "> 
                     <a href="javascript:;"><i class="layui-icon">&#xe613;</i>会员管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe621;</i>会员列表</a></dd>
+                        <dd><a href="javascript:;" href-url="<%=basePath %>member"><i class="layui-icon">&#xe621;</i>会员列表</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item "> 

@@ -78,7 +78,42 @@ public class Constant {
 			return value;
 		}
 	}
-	
+
+	/**
+	 * 订单状态
+	 * 
+	 * @author oldHuang
+	 * @email
+	 * @date
+	 */
+	public enum RequestMethodType {
+		/**
+		 * get
+		 */
+		GET("GET"),
+		/**
+		 * post
+		 */
+		POST("POST"),
+		/**
+		 * put
+		 */
+		PUT("PUT"),
+		/**
+		 * delete
+		 */
+		DELETE("DELETE");
+		
+		private String value;
+
+		private RequestMethodType(String value) {
+			this.value = value;
+		}
+
+		public String getValue() {
+			return value;
+		}
+	}
 	/**
 	 * 订单状态
 	 * 

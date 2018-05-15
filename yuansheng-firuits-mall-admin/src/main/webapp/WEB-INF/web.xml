@@ -8,9 +8,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-        <!--  
-        classpath:spring-jdbc.xml 
-        -->
+        classpath:spring-mybatis.xml 
+        classpath:spring-mvc.xml
         classpath*:mall-*.xml
 		</param-value>
 	</context-param>
@@ -46,7 +45,7 @@
 	<!-- 设置编码 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<filter-class>com.ysdevelop.admin.filter.EncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
@@ -56,6 +55,29 @@
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+		<!-- 用来获取put表单请求 -->
+	<filter>  
+        <filter-name>httpPutFormFilter</filter-name>  
+        <filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>  
+    </filter>
+	
+    <filter-mapping>  
+        <filter-name>httpPutFormFilter</filter-name>  
+        <servlet-name>dispatcher</servlet-name>  
+    </filter-mapping>
+    
+    
+    <!-- http请求满足满足delete,put请求 -->
+	<filter>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<!-- 备注，这边的名称必须和配置'springmvc'的servlet名称一样 -->
+		<servlet-name>dispatcher</servlet-name>
 	</filter-mapping>
 	
 	<!-- The front controller of this Spring Web application, responsible for handling all application requests -->
