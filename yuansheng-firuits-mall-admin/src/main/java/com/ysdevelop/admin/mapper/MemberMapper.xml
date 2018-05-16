@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysdevelop.admin.mapper.MemberDao">
+
+    <select id="countByQueryMap" resultType="java.lang.Integer" parameterType="java.util.Map" >
+      SELECT
+      count(`m`.`id`)
+      FROM `t_ys_firuits_mall_member` as `m`
+      WHERE 1=1
+       <if test="queryMap.memberPhoneNo != null and queryMap.memberPhoneNo != 'null' and queryMap.memberPhoneNo != '' ">
+       and 
+       (`m`.telephone = #{queryMap.memberPhoneNo} or `m`.mobile = #{queryMap.memberPhoneNo})
+       </if>
+       <if test="queryMap.memberName != null and queryMap.memberName != 'null' and queryMap.memberName != '' ">
+       and
+       `m`.name like CONCAT('%',#{queryMap.memberName},'%') 
+       </if>
+       <if test="queryMap.address != null and queryMap.address != 'null' and queryMap.address != '' ">
+       and
+       (`m`.province like CONCAT('%',#{queryMap.address},'%') or `m`.city like CONCAT('%',#{queryMap.address},'%') or `m`.town like CONCAT('%',#{queryMap.address},'%') or `m`.detailAddress like CONCAT('%',#{queryMap.address},'%') )
+       </if>
+ 
+       <if test="queryMap.status != null and queryMap.status != 'null' and queryMap.status != '' ">
+        and
+       `m`.status = #{queryMap.status}
+       </if>
+       <if test="queryMap.startTime != null and queryMap.startTime != 'null'  and queryMap.startTime != '' ">
+         and  <![CDATA[  m.`createTime` >= #{queryMap.startTime} ]]>
+       </if>
+       <if test="queryMap.endTime != null and queryMap.endTime != 'null'  and queryMap.endTime != '' ">
+         and  <![CDATA[  m.`createTime` <= #{queryMap.endTime} ]]>
+       </if>
+      
+    
+    </select>
+    
+    <select id="paginationByQueryMap" resultType="com.ysdevelop.admin.entity.Member">
+      SELECT
+      `m`.id as `id`,
+      `m`.name as `name`,
+      `m`.mobile as `mobile`,
+      `m`.telephone as `telephone`,
+      CONCAT(`m`.province,`m`.city,IFNULL(`m`.town,''),IFNULL(`m`.detailAddress,'')) as `detailAddress`,
+      `m`.createTime as `createTime`,   
+      `m`.status as `status`
+      FROM `t_ys_firuits_mall_member` as `m`
+      WHERE 1=1
+       <if test="queryMap.memberPhoneNo != null and queryMap.memberPhoneNo != 'null' and queryMap.memberPhoneNo != '' ">
+       and 
+       (`m`.telephone = #{queryMap.memberPhoneNo} or `m`.mobile = #{queryMap.memberPhoneNo})
+       </if>
+       <if test="queryMap.memberName != null and queryMap.memberName != 'null' and queryMap.memberName != '' ">
+       and
+       `m`.name like CONCAT('%',#{queryMap.memberName},'%') 
+       </if>
+       <if test="queryMap.address != null and queryMap.address != 'null' and queryMap.address != '' ">
+       and
+       (`m`.province like CONCAT('%',#{queryMap.address},'%') or `m`.city like CONCAT('%',#{queryMap.address},'%') or `m`.town like CONCAT('%',#{queryMap.address},'%') or `m`.detailAddress like CONCAT('%',#{queryMap.address},'%') )
+       </if>
+       <if test="queryMap.status != null and queryMap.status != 'null' and queryMap.status != '' ">
+        and
+       `m`.status = #{queryMap.status}
+       </if>
+       <if test="queryMap.startTime != null and queryMap.startTime != 'null'  and queryMap.startTime != '' ">
+         and  <![CDATA[  m.`createTime` >= #{queryMap.startTime} ]]>
+       </if>
+       <if test="queryMap.endTime != null and queryMap.endTime != 'null'  and queryMap.endTime != '' ">
+         and  <![CDATA[ m.`createTime` <= #{queryMap.endTime} ]]>
+       </if>
+         order by m.`createTime` desc
+         limit #{pagination.start},#{pagination.pageSize}
+    
+    </select>
+    
+    <update id="updateStatusById">
+		update `t_ys_firuits_mall_member` 
+		set `status` = case
+		when
+		`status` = 0 then
+		1
+		when `status` = 1 then
+		0
+		else
+		`status`
+		end
+		where
+		`id` =
+		#{id}
+	</update>
+	
+	<delete id="deleteBatchByIds">
+		delete from `t_ys_firuits_mall_member`
+		where id in
+		<foreach collection="list" item="id" separator="," open="(" close=")" index="">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<select id="getInfoById" resultType="com.ysdevelop.admin.entity.Member" >
+	  SELECT
+      `m`.id as `id`,
+      `m`.name as `name`,
+      `m`.mobile as `mobile`,
+      `m`.telephone as `telephone`,
+      CONCAT(`m`.province,`m`.city,IFNULL(`m`.town,''),IFNULL(`m`.detailAddress,'')) as `detailAddress`,
+      `m`.createTime as `createTime`,   
+      `m`.restaurant as `restaurant`
+      FROM `t_ys_firuits_mall_member` as `m`
+      where `m`.id = #{id}
+	
+	</select>
+    
+
+
+</mapper>
