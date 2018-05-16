@@ -89,7 +89,7 @@ layui.use([ 'table', 'form', 'layer', 'laydate','vip_table' ], function() {
    table.on('tool(table-data)',function(obj){  
 	   var data = obj.data;
 	   if(obj.event === 'detail'){
-           layer.msg('ID：'+ data.id + ' 的查看操作');
+           common_ops.x_admin_show("用户详情", basePath+"member/info?id="+data.id, '600', '500');
        } else if(obj.event === 'del'){
     	   var callback = {
     			   ok:function(){
@@ -114,12 +114,9 @@ layui.use([ 'table', 'form', 'layer', 'laydate','vip_table' ], function() {
     						 common_ops.alert("注销失败", function(){
 								 tableIns.reload();
 							 });
-    					 }
-						 
+    					 } 
     				   })
     				   
-    				   //common_ops.msg("删除",null);
-    				  // tableIns.reload();
     			   },
     			   cancle:null
     	   }

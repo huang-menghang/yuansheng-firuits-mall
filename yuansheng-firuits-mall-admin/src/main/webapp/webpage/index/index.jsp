@@ -6,6 +6,7 @@
 <head>
     <jsp:include page="/context/css-tags.jsp"/>
     <title>首页 </title>
+</head>   
 <body>
 
 <!-- layout admin -->
@@ -116,7 +117,7 @@
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
-                    <iframe id="iframe" src="demo/welcome.html" frameborder="0"></iframe>
+                    <iframe id="iframe" src="<%=basePath%>main/welcome" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
