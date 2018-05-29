@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysdevelop.admin.mapper.GoodsDao">
+	<insert id="saveByQueryMap">
+		INSERT INTO 
+			`t_ys_firuits_goods`
+			(`sort`,`standrds`,`imagePath`,`name`,`price`,`discoutPrice`,`packet`,`weight`,`storage`,`description`,`brandId`,`launcTime`,`createTime`,`categoryId`)
+		VALUES
+			(#{queryMap.sort},#{queryMap.standrds},#{queryMap.imagePath},#{queryMap.name},#{queryMap.price},#{queryMap.discoutPrice},#{queryMap.packet},#{queryMap.weight},#{queryMap.storage},#{queryMap.description},#{queryMap.brandName},#{queryMap.launcTime},now(),#{queryMap.categoryName})
+	</insert>
+	<select id="countByQueryMap" resultType="java.lang.Integer">
+		SELECT
+			count(`g`.id)
+		FROM
+			`t_ys_firuits_goods` AS `g` 
+		LEFT JOIN 
+			`t_ys_firuits_brand` AS `b` ON `g`.brandId = `b`.id
+		LEFT JOIN
+			`t_ys_firuits_category` AS `c` ON `c`.id = `g`.categoryId
+		WHERE 1=1
+		<if test="queryMap.name != null and queryMap.name != 'null' and queryMap.name != '' ">
+       and
+       `g`.name like CONCAT('%',#{queryMap.name},'%') 
+       </if>
+       <if test="queryMap.categoryName != null and queryMap.categoryName != 'null' and queryMap.categoryName != '' ">
+       and
+       `c`.name like CONCAT('%',#{queryMap.categoryName},'%') 
+       </if>
+       <if test="queryMap.brandName != null and queryMap.brandName != 'null' and queryMap.brandName != '' ">
+       and
+       `b`.name like CONCAT('%',#{queryMap.brandName},'%') 
+       </if>
+       <if test="queryMap.status != null and queryMap.status != 'null' and queryMap.status != '' ">
+        and
+       `g`.status = #{queryMap.status}
+       </if>
+       <if test="queryMap.startSales != null and queryMap.startSales != 'null'  and queryMap.startSales != '' ">
+         and  <![CDATA[  `g`.sales >= #{queryMap.startSales} ]]>
+       </if>
+       <if test="queryMap.endSales != null and queryMap.endSales != 'null'  and queryMap.endSales != '' ">
+         and  <![CDATA[   `g`.sales <= #{queryMap.endSales} ]]>
+       </if>	
+       <if test="queryMap.startPrice != null and queryMap.startPrice != 'null'  and queryMap.startPrice != '' ">
+         and  <![CDATA[  `g`.discoutPrice >= #{queryMap.startPrice} ]]>
+       </if>
+       <if test="queryMap.endPrice != null and queryMap.endPrice != 'null'  and queryMap.endPrice != '' ">
+         and  <![CDATA[  `g`.discoutPrice <= #{queryMap.endPrice} ]]>
+       </if>	
+       <if test="queryMap.startTime != null and queryMap.startTime != 'null'  and queryMap.startTime != '' ">
+         and  <![CDATA[  `g`.`createTime` >= #{queryMap.startTime} ]]>
+       </if>
+       <if test="queryMap.endTime != null and queryMap.endTime != 'null'  and queryMap.endTime != '' ">
+         and  <![CDATA[  `g`.`createTime` <= #{queryMap.endTime} ]]>
+       </if>	
+	</select>
+	<select id="paginationByQueryMap" resultType="com.ysdevelop.admin.entity.Goods">
+		SELECT
+			`g`.id AS id,
+			`g`.name AS name,
+			`b`.name AS brandName,
+			`g`.status AS status,
+			`g`.sales AS sales,
+			`g`.price AS price,
+			`g`.discoutPrice AS discoutPrice,
+			`g`.packet AS packet,
+			`g`.launcTime AS launcTime,
+			`c`.name AS categoryName
+		FROM
+			`t_ys_firuits_goods` AS `g` 
+		LEFT JOIN 
+			`t_ys_firuits_brand` AS `b` ON `g`.brandId = `b`.id
+		LEFT JOIN
+			`t_ys_firuits_category` AS `c` ON `c`.id = `g`.categoryId
+		WHERE 1=1
+		<if test="queryMap.name != null and queryMap.name != 'null' and queryMap.name != '' ">
+       and
+       `g`.name like CONCAT('%',#{queryMap.name},'%') 
+       </if>
+       <if test="queryMap.categoryName != null and queryMap.categoryName != 'null' and queryMap.categoryName != '' ">
+       and
+       `c`.name like CONCAT('%',#{queryMap.categoryName},'%') 
+       </if>
+       <if test="queryMap.brandName != null and queryMap.brandName != 'null' and queryMap.brandName != '' ">
+       and
+       `b`.name like CONCAT('%',#{queryMap.brandName},'%') 
+       </if>
+       <if test="queryMap.status != null and queryMap.status != 'null' and queryMap.status != '' ">
+        and
+       `g`.status = #{queryMap.status}
+       </if>
+       <if test="queryMap.startSales != null and queryMap.startSales != 'null'  and queryMap.startSales != '' ">
+         and  <![CDATA[  `g`.sales >= #{queryMap.startSales} ]]>
+       </if>
+       <if test="queryMap.endSales != null and queryMap.endSales != 'null'  and queryMap.endSales != '' ">
+         and  <![CDATA[   `g`.sales <= #{queryMap.endSales} ]]>
+       </if>	
+       <if test="queryMap.startPrice != null and queryMap.startPrice != 'null'  and queryMap.startPrice != '' ">
+         and  <![CDATA[  `g`.discoutPrice >= #{queryMap.startPrice} ]]>
+       </if>
+       <if test="queryMap.endPrice != null and queryMap.endPrice != 'null'  and queryMap.endPrice != '' ">
+         and  <![CDATA[  `g`.discoutPrice <= #{queryMap.endPrice} ]]>
+       </if>	
+       <if test="queryMap.startTime != null and queryMap.startTime != 'null'  and queryMap.startTime != '' ">
+         and  <![CDATA[  `g`.`createTime` >= #{queryMap.startTime} ]]>
+       </if>
+       <if test="queryMap.endTime != null and queryMap.endTime != 'null'  and queryMap.endTime != '' ">
+         and  <![CDATA[  `g`.`createTime` <= #{queryMap.endTime} ]]>
+       </if>	
+		ORDER BY
+			`g`.`id` ASC
+		LIMIT #{pagination.start},#{pagination.pageSize}
+	</select>
+	
+	<update id="updateStatusById">
+		UPDATE 
+			`t_ys_firuits_goods` 
+		SET 
+			`updateTime` = now(),
+			`status` = case
+		WHEN
+			`status` = 0 then 1
+		WHEN 
+			`status` = 1 then 0
+		ELSE
+			`status`
+		END
+		WHERE
+			`id` = #{id}
+	</update>
+	
+	<delete id="deleteBatchByIds">
+		DELETE FROM `t_ys_firuits_goods`
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")" index="">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<select id="ImagePathByids" resultType="com.ysdevelop.admin.entity.Goods">
+		SELECT
+			imagePath
+		FROM 
+			`t_ys_firuits_goods`
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")" index="">
+			#{id}
+		</foreach>
+	</select>
+	
+	<select id="getInfoById" resultType="com.ysdevelop.admin.entity.Goods">
+		SELECT
+			`g`.imagePath AS imagePath,
+			`g`.name AS name,
+			`b`.name AS brandName,
+			`g`.sales AS sales,
+			`g`.discoutPrice AS discoutPrice,
+			`g`.description AS description,
+			`g`.launcTime AS launcTime,
+			`g`.packet AS packet,
+			`g`.storage AS storage,
+			`g`.weight AS weight,
+			`g`.sort AS sort,
+			`g`.standrds AS standrds,
+			`c`.name AS categoryName,
+			`a`.name AS categoryParentName 
+		FROM
+			`t_ys_firuits_goods` AS `g` 
+		LEFT JOIN 
+			`t_ys_firuits_brand` AS `b` ON `g`.brandId = `b`.id
+		LEFT JOIN
+			`t_ys_firuits_category` AS `c` ON `c`.id = `g`.categoryId
+		LEFT JOIN 
+			`t_ys_firuits_category` AS `a` ON `a`.id = `c`.parentId
+		WHERE `g`.id = #{id}
+	</select>
+	
+	<select id="getGoodsById" resultType="com.ysdevelop.admin.entity.Goods">
+		SELECT
+			`g`.imagePath AS imagePath,
+			`g`.name AS name,
+			`b`.id AS brandId,
+			`g`.sales AS sales,
+			`g`.price AS price,
+			`g`.discoutPrice AS discoutPrice,
+			`g`.description AS description,
+			`g`.launcTime AS launcTime,
+			`g`.packet AS packet,
+			`g`.storage AS storage,
+			`g`.weight AS weight,
+			`g`.sort AS sort,
+			`g`.standrds AS standrds,
+			`c`.id AS categoryId,
+			`a`.id AS categoryparentId
+		FROM
+			`t_ys_firuits_goods` AS `g` 
+		LEFT JOIN 
+			`t_ys_firuits_brand` AS `b` ON `g`.brandId = `b`.id
+		LEFT JOIN
+			`t_ys_firuits_category` AS `c` ON `c`.id = `g`.categoryId
+		LEFT JOIN 
+			`t_ys_firuits_category` AS `a` ON `a`.id = `c`.parentId
+		WHERE `g`.id = #{id}
+	</select>
+	
+	<select id="getImagePathById" resultType="com.ysdevelop.admin.entity.Goods">
+		SELECT
+			imagePath
+		FROM
+			`t_ys_firuits_goods`
+		WHERE id = #{id}
+	</select>
+	
+	<update id="editGoodsByQueryMap">
+		UPDATE 
+			`t_ys_firuits_goods` 
+		<set>
+				updateTime = now(),
+			<if test="queryMap.name != null and queryMap.name != 'null' and queryMap.name != '' ">
+		       name = #{queryMap.name},
+	       </if>
+			<if test="queryMap.launcTime != null and queryMap.launcTime != 'null' and queryMap.launcTime != '' ">
+		       launcTime = #{queryMap.launcTime},
+	       </if>
+			<if test="queryMap.brandName != null and queryMap.brandName != 'null' and queryMap.brandName != '' ">
+		       brandId = #{queryMap.brandName},
+	       </if>
+			<if test="queryMap.categoryName != null and queryMap.categoryName != 'null' and queryMap.categoryName != '' ">
+		       categoryId = #{queryMap.categoryName},
+	       </if>
+			<if test="queryMap.description != null and queryMap.description != 'null' and queryMap.description != '' ">
+		       description = #{queryMap.description},
+	       </if>
+			<if test="queryMap.discoutPrice != null and queryMap.discoutPrice != 'null' and queryMap.discoutPrice != '' ">
+		       discoutPrice = #{queryMap.discoutPrice},
+	       </if>
+			<if test="queryMap.imagePath != null and queryMap.imagePath != 'null' and queryMap.imagePath != '' ">
+		       imagePath = #{queryMap.imagePath},
+	       </if>
+			<if test="queryMap.packet != null and queryMap.packet != 'null' and queryMap.packet != '' ">
+		       packet = #{queryMap.packet},
+	       </if>
+			<if test="queryMap.price != null and queryMap.price != 'null' and queryMap.price != '' ">
+		       price = #{queryMap.price},
+	       </if>
+			<if test="queryMap.sort != null and queryMap.sort != 'null' and queryMap.sort != '' ">
+		       sort = #{queryMap.sort},
+	       </if>
+			<if test="queryMap.standrds != null and queryMap.standrds != 'null' and queryMap.standrds != '' ">
+		       standrds = #{queryMap.standrds},
+	       </if>
+			<if test="queryMap.storage != null and queryMap.storage != 'null' and queryMap.storage != '' ">
+		       storage = #{queryMap.storage},
+	       </if>
+			<if test="queryMap.storage != null and queryMap.storage != 'null' and queryMap.storage != '' ">
+		       weight = #{queryMap.weight},
+	       </if>
+		</set>
+		WHERE
+			`id` = #{queryMap.id}
+	</update>
+</mapper>

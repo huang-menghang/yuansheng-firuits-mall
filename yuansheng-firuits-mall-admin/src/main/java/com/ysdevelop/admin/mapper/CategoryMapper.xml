@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysdevelop.admin.mapper.CategoryDao">
+	
+	<select id="getCategories" resultType="com.ysdevelop.admin.entity.Category">
+		SELECT 
+			`id`,
+			`name`
+		FROM
+			`t_ys_firuits_category`
+		WHERE
+			level = 1 AND parentId = -1
+	</select>
+
+	<select id="getCategoriesByParentId" resultType="com.ysdevelop.admin.entity.Category">
+		SELECT 
+			`id`,
+			`name`
+		FROM
+			`t_ys_firuits_category`
+		WHERE
+			level = 2 AND parentId = #{id}
+	</select>
+	
+</mapper>
