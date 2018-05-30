@@ -15,6 +15,13 @@
 	
 	<mvc:default-servlet-handler />
 	
+		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <!--设置上传最大尺寸为5MB-->
+	    <property name="maxUploadSize" value="5242880"/>
+	    <property name="defaultEncoding" value="UTF-8"/>
+	    <property name="resolveLazily" value="true"/>
+	</bean>
+	
     <bean id="internalResourceViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/webpage/" />

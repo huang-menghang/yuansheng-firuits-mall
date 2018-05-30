@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysdevelop.admin.mapper.LogsDao">
+   <select id="countByQueryMap" resultType="java.lang.Integer">
+   SELECT
+   count(l.location)
+   FROM t_ys_firuits_systemaccesslog as l
+   WHERE 1=1
+   <if test="queryMap.location != null and queryMap.location != 'null' and queryMap.location != '' ">
+   and
+   l.location like CONCAT('%',#{queryMap.location},'%')
+   </if>
+   <if test="queryMap.level != null and queryMap.level != 'null' and queryMap.level != '' ">
+   and
+   l.level like CONCAT('%',#{queryMap.level},'%')
+   </if>
+   <if test="queryMap.message != null and queryMap.message != 'null' and queryMap.message != '' ">
+   and
+   l.message like CONCAT('%',#{queryMap.message},'%')
+   </if>
+   <if test="queryMap.startTime != null and queryMap.startTime !=  'null'   and queryMap.startTime != ''   ">
+   and  <![CDATA[  l.date  >= #{queryMap.startTime} ]]>
+   </if>
+   <if test="queryMap.endTime != null and queryMap.endTime !=  'null'   and queryMap.endTime != ''   ">
+   and  <![CDATA[  l.date  <= #{queryMap.endTime} ]]>
+   </if>
+   </select>
+   
+   <select id="paginationByQueryMap" resultType="com.ysdevelop.admin.entity.LogsMember">
+   SELECT
+   l.id,
+   l.location,
+   l.date,
+   l.logger,
+   l.level,
+   l.message
+   FROM t_ys_firuits_systemaccesslog as l
+   WHERE 1=1
+   <if test="queryMap.location != null and queryMap.location != 'null' and queryMap.location != '' ">
+   and
+   l.location like CONCAT('%',#{queryMap.location},'%')
+   </if>
+   <if test="queryMap.level != null and queryMap.level != 'null' and queryMap.level != '' ">
+   and
+   l.level like CONCAT('%',#{queryMap.level},'%')
+   </if>
+   <if test="queryMap.message != null and queryMap.message != 'null' and queryMap.message != '' ">
+   and
+   l.message like CONCAT('%',#{queryMap.message},'%')
+   </if>
+   <if test="queryMap.startTime != null and queryMap.startTime !=  'null'   and queryMap.startTime != ''   ">
+   and  <![CDATA[  l.date  >= #{queryMap.startTime} ]]>
+   </if>
+   <if test="queryMap.endTime != null and queryMap.endTime !=  'null'   and queryMap.endTime != ''   ">
+   and  <![CDATA[  l.date  <= #{queryMap.endTime} ]]>
+   </if>
+   order by l.date  desc
+   limit #{pagination.start},#{pagination.pageSize}
+   </select>
+   
+   <delete id="deleteBatchByIds">
+   delete from t_ys_firuits_systemaccesslog
+   where id in
+   <foreach collection="list" item="id" separator="," open="(" close=")" index="">
+   #{id}
+   </foreach>
+   </delete>
+   
+   <select id="getInfoById" resultType="com.ysdevelop.admin.entity.LogsMember">
+	  SELECT
+	  l.location,
+	  l.date,
+	  l.logger,
+	  l.level,
+	  l.message
+	  FROM t_ys_firuits_systemaccesslog as l
+	  where l.id = #{id}
+	</select>
+</mapper>
