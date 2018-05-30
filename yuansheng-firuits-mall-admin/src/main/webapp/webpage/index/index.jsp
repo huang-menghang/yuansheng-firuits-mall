@@ -86,7 +86,7 @@
                   <li class="layui-nav-item "> 
                     <a href="javascript:;"><i class="layui-icon">&#xe62e;</i>权限管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="<%=basePath%>rple/role""><i class="layui-icon">&#xe621;</i>角色列表</a></dd>
+                        <dd><a href="javascript:;" href-url="<%=basePath%>role/role""><i class="layui-icon">&#xe621;</i>角色列表</a></dd>
                         <dd><a href="javascript:;" href-url="<%=basePath%>permission/permission""><i class="layui-icon">&#xe621;</i>权限列表</a></dd>
                         <dd><a href="javascript:;" href-url="<%=basePath%>permission/permissionType"><i class="layui-icon">&#xe621;</i>权限分类列表</a></dd>
                     </dl>

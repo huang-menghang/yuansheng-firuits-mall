@@ -38,7 +38,7 @@ layui.use(['layer','table'],function(){
 			type:2,
 			title:"添加角色",
 			area:['400px','500px'],
-		    content:basePath+"page/roleAdd",
+		    content:basePath+"role/roleAdd",
 		    end:function(){
 		    	tableIns.reload();
 		    }
@@ -57,7 +57,7 @@ layui.use(['layer','table'],function(){
 				type:2,
 				title:"修改角色信息",
 				area:['600px','500px'],
-			    content:basePath+"page/roleEdit?id="+data.id,
+			    content:basePath+"role/roleEdit?id="+data.id,
 			    end:function(){
 			    	tableIns.reload();
 			    }
@@ -83,7 +83,7 @@ layui.use(['layer','table'],function(){
 				type:2,
 				title:"修改角色权限",
 				area:['400px','500px'],
-			    content:basePath+"page/roleChange?id="+data.id,
+			    content:basePath+"role/roleChange?id="+data.id,
 			    end:function(){
 			    	tableIns.reload();
 			    }
