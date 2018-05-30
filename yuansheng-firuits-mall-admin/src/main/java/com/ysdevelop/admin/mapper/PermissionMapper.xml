@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ysdevelop.admin.mapper.PermissionDao">
-<select id="listPermissionById" resultType="com.admin.entity.Permission">
+<select id="listPermissionById" resultType="com.ysdevelop.admin.entity.Permission">
 select `p`.`id`,`p`.`permissionName`,`p`.`permissionLevel`,`p`.`permissionDescription`
 from `t_ys_firuits_permission` as `p`
 right join `t_ys_firuits_role_permission` as `rp`
