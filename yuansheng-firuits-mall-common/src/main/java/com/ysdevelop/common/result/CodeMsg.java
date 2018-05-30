@@ -23,6 +23,7 @@ public class CodeMsg {
 	public static CodeMsg MEMBER_UNLOGIN = new CodeMsg(500008, "用户未登录");
 	public static CodeMsg OLDPASSWORD_WRONG =  new CodeMsg(500009,"旧密码输入错误");
 	public static CodeMsg NEWOLDPASSWOR_SAME =  new CodeMsg(500010,"新旧密码一致");
+	public static CodeMsg ROLE_EXIST =  new CodeMsg(500011,"角色已存在");
 	
 	// 支付
 	public static CodeMsg PAY_ERROR = new CodeMsg(500100,"支付异常");
