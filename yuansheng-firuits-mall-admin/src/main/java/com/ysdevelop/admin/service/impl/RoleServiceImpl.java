@@ -5,17 +5,19 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ysdevelop.admin.entity.Permission;
 import com.ysdevelop.admin.entity.Role;
 import com.ysdevelop.admin.mapper.RoleDao;
-import com.ysdevelop.admin.mapper.RolePermissionDao;
 import com.ysdevelop.admin.service.PermissionService;
+import com.ysdevelop.admin.service.RolePermissionService;
 import com.ysdevelop.admin.service.RoleService;
 import com.ysdevelop.common.exception.WebServiceException;
 import com.ysdevelop.common.page.Pagination;
 import com.ysdevelop.common.result.CodeMsg;
 
+@Service
 public class RoleServiceImpl implements RoleService{
 	@Autowired
 	private RoleDao roleDao;
@@ -24,7 +26,7 @@ public class RoleServiceImpl implements RoleService{
 	private PermissionService permissionService;
 	
 	@Autowired
-	private RolePermissionDao rolePermissionDao;
+	private RolePermissionService rolePermissionService;
 
 	@Override
 	public List<Role> paginationRoles(Pagination<Role> pagination, Map<String, String> queryMap) {
@@ -78,7 +80,7 @@ public class RoleServiceImpl implements RoleService{
 			if (permission.equals("description")||permission.equals("roleName")) {
 				continue;
 			}else {
-				rolePermissionDao.saveRolePermission(id,Integer.valueOf(permission));
+				rolePermissionService.saveRolePermission(id,Integer.valueOf(permission));
 			}
 		}
 		return true;
@@ -99,16 +101,16 @@ public class RoleServiceImpl implements RoleService{
 	public boolean changePermission(Map<String, String> message, Integer roleId) {
 		Set<String> permissions = message.keySet();
 		for(String permissionId:permissions){
-			Integer id = rolePermissionDao.getRolePermissionById(roleId, Integer.valueOf(permissionId));
+			Integer id = rolePermissionService.getRolePermissionById(roleId, Integer.valueOf(permissionId));
 			if (id!= null) {
-				boolean isChange = rolePermissionDao.deleteRolePermission(roleId, Integer.valueOf(permissionId));
+				boolean isChange = rolePermissionService.deleteRolePermission(roleId, Integer.valueOf(permissionId));
 				if (!isChange) {
 					return true;
 				} else {
 					continue;
 				} 
 			}else {
-				boolean isChange = rolePermissionDao.saveRolePermission(roleId, Integer.valueOf(permissionId));
+				boolean isChange = rolePermissionService.saveRolePermission(roleId, Integer.valueOf(permissionId));
 				if (!isChange) {
 					return true;
 				} else {
