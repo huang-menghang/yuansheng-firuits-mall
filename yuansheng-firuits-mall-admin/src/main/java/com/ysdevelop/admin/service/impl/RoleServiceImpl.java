@@ -88,7 +88,6 @@ public class RoleServiceImpl implements RoleService{
 
 	@Override
 	public Role getRole(Integer id) {
-		
 		return roleDao.getRoleById(id);
 	}
 
