@@ -1,8 +1,9 @@
-var isClose = false;
+var isClose = false;//用于判断是否需要重新刷新页面
 layui.use(['table','element','laydate'],function(){
 	var table = layui.table
 		  ,laydate = layui.laydate
 		  ,element = layui.element;
+	//初始化品牌表格
 	var initTable = table.render({
 		elem:"#dateTable",
 		url: basePath+"brand/pagination",
@@ -67,6 +68,7 @@ layui.use(['table','element','laydate'],function(){
 		$(".layui-form input").val('');
 		$(".layui-form select option[value='']").attr("selected", true);
 	});
+	//查询
 	$("#btn-search").on("click",function(){
 		var name  = $(".layui-form input[name='name']").val();
 		var description  = $(".layui-form input[name='description']").val();
@@ -254,6 +256,7 @@ layui.use(['table','element','laydate'],function(){
 					end.value = value;
 				}
 		};
+		//时间选框加载
 		laydate.render(createTimeStart);
 		laydate.render(createTimeEnd);
 		laydate.render(updateTimeStart);

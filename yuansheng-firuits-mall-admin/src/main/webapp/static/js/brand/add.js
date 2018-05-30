@@ -3,6 +3,7 @@ var id = common_ops.g_getQueryString("id");
 var countEditItem = 0;
 layui.use(['form'],function(){
 	var form = layui.form;
+	//表单校验
 	form.verify({
 		name : function(value) {
 			if (value.length < 2) {
@@ -15,6 +16,7 @@ layui.use(['form'],function(){
 			}
 		}
 	});
+	//添加按钮
 	form.on("submit(sub)",function(data){
 		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 		$.ajax({

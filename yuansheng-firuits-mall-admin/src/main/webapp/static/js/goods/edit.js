@@ -1,10 +1,11 @@
-var update = null;
-var id = common_ops.g_getQueryString("id");
-var countEditItem = 0;
+var update = null;//用于存放后台传到前端的初始化参数(方便后期判断是否有做过改动)
+var id = common_ops.g_getQueryString("id");//获取url中的参数
+var countEditItem = 0;//用于记录未改动的条目数
 layui.use(['form','laydate','upload'],function(){
 	var form = layui.form;
 	var laydate = layui.laydate;
 	var upload = layui.upload;
+	//初始化修改页面表单元素
 	$.ajax({
 		url: basePath + "goods/edit/getGoods/" + id,
 		method: "GET",
@@ -42,12 +43,11 @@ layui.use(['form','laydate','upload'],function(){
 			}
 		}
 	});
+	//上传文件
 	upload.render({
 		elem:"#chooseFile",
 		url:basePath+"goods/upload",
 		auto:false,
-		acceptMime: "image/jpg, image/png",
-		exts:"png|jpg",
 		bindAction: "#uploadFile",
 		before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
 			$("#chooseFile").attr("disabled",true).removeClass("layui-btn-normal").addClass("layui-btn-disabled");
@@ -72,6 +72,7 @@ layui.use(['form','laydate','upload'],function(){
 			layer.alert("操作失败");
 		}
 	});
+	//表单验证
 	form.verify({
 		name : function(value) {
 			if (value.length < 2) {
@@ -94,6 +95,7 @@ layui.use(['form','laydate','upload'],function(){
 			}
 		}
 	});
+	//修改点击事件
 	form.on("submit(edit)",function(data){
 		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 		var dataField = data.field;
@@ -173,6 +175,7 @@ layui.use(['form','laydate','upload'],function(){
 			}
 		});
 	});
+	//通过一级分类点击事件异步加载二级分类
 	form.on("select(categories)",function(data){
 		var id = data.value;
 		if (id == null || id =="") {
@@ -198,6 +201,7 @@ layui.use(['form','laydate','upload'],function(){
 			}
 		});
 	});
+	//时间模块加载
 	laydate.render({
 	    elem: '#launcTime',
 	    min : '2017-01-01 23:59:59',

@@ -1,8 +1,9 @@
-var update = null;
-var id = common_ops.g_getQueryString("id");
-var countEditItem = 0;
+var update = null;//用于存放后台传到前端的初始化参数(方便后期判断是否有做过改动)
+var id = common_ops.g_getQueryString("id");//获取url中的参数
+var countEditItem = 0;//用于记录未改动的条目数
 layui.use(['form'],function(){
 	var form = layui.form;
+	//初始化表单数据
 	$.ajax({
 		url: basePath + "brand/edit/getBrand/" + id,
 		method: "GET",
@@ -17,6 +18,7 @@ layui.use(['form'],function(){
 			}
 		}
 	});
+	//表单校验
 	form.verify({
 		name : function(value) {
 			if (value.length < 2) {
@@ -29,6 +31,7 @@ layui.use(['form'],function(){
 			}
 		}
 	});
+	//修改按钮操作
 	form.on("submit(edit)",function(data){
 		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 		var dataField = data.field;

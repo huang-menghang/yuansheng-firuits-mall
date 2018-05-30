@@ -1,5 +1,7 @@
 layui.use(['form'],function() {
+	//获取url中的id参数
 	var id = common_ops.g_getQueryString("id");
+	//初始化表单中的数据
 	$.ajax({
 		url : basePath + "goods/info/" + id,
 		method: "GET",

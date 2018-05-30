@@ -1,8 +1,9 @@
-var isClose = false;
+var isClose = false;//用于判断是否需要重新刷新页面
 layui.use(['table','element','laydate'],function(){
 	var table = layui.table;
 	var element = layui.element;
 	var laydate = layui.laydate;
+	//初始化商品表格
 	var initTable = table.render({
 		elem:"#dateTable",
 		url: basePath+"goods/pagination",
@@ -132,7 +133,7 @@ layui.use(['table','element','laydate'],function(){
 			}
 		});
 	})
-	//查看、下架、编辑
+	//查看、下架、上架、编辑
 	table.on("tool(table-data)",function(obj){
 		var data = obj.data;
 		if (obj.event == "info") {
@@ -254,7 +255,7 @@ layui.use(['table','element','laydate'],function(){
 				end.value = value;
 			}
 		};
-
+		//初始化时间选框
 		laydate.render(start);
 		laydate.render(end);
   

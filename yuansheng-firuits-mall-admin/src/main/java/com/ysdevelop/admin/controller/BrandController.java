@@ -52,6 +52,7 @@ public class BrandController {
 		return Result.success("操作成功");
 	}
 	
+	//用于批量删除品牌
 	@RequestMapping(value = "/deleteBatch",method = RequestMethod.DELETE)
 	@ResponseBody
 	public Result<String> deleteBatch(@RequestParam(value = "ids[]", required = false) List<Long> ids){
@@ -60,22 +61,26 @@ public class BrandController {
 		return Result.success("操作成功");
 	}
 	
+	//跳转品牌页面
 	@RequestMapping(value = "/edit",method = RequestMethod.GET)
 	public String edit(){
 		return "brand/edit";
 	}
 	
+	//跳转添加页面
 	@RequestMapping(value = "/add",method = RequestMethod.GET)
 	public String add(){
 		return "brand/add";
 	}
 	
+	//初始化修改页面表单
 	@RequestMapping(value = "/edit/getBrand/{id}",method = RequestMethod.GET)
 	@ResponseBody
 	public Result<String> getBrand(@PathVariable(value = "id") Long id){
 		return Result.successData(JSONHelper.bean2json(brandService.getBrandById(id)));
 	}
 	
+	//进行品牌的修改操作
 	@RequestMapping(value = "edit/update",method = RequestMethod.PUT)
 	@ResponseBody
 	public Result<String> update(@RequestParam Map<String,String> queryMap){
@@ -84,6 +89,7 @@ public class BrandController {
 		return Result.success("操作成功");
 	}
 
+	//进行品牌的添加操作
 	@RequestMapping(value = "/add/save",method = RequestMethod.POST)
 	@ResponseBody
 	public Result<String> save(@RequestParam Map<String,String> queryMap){

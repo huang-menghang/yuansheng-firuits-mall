@@ -2,6 +2,7 @@ layui.use(['form','laydate','upload'],function(){
 	var form = layui.form;
 	var laydate = layui.laydate;
 	var upload = layui.upload;
+	//初始化一级分类、品牌下拉框
 	$.ajax({
 		url: basePath + "goods/add/getBrandsAndCategories",
 		method: "GET",
@@ -19,12 +20,11 @@ layui.use(['form','laydate','upload'],function(){
 			}
 		}
 	});
+	//上传文件
 	upload.render({
 		elem:"#chooseFile",
 		url:basePath+"goods/upload",
 		auto:false,
-		acceptMime: "image/jpg, image/png",
-		exts:"png|jpg",
 		bindAction: "#uploadFile",
 		before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
 			$("#chooseFile").attr("disabled",true).removeClass("layui-btn-normal").addClass("layui-btn-disabled");
@@ -49,6 +49,7 @@ layui.use(['form','laydate','upload'],function(){
 			layer.alert("操作失败");
 		}
 	});
+	//表单校验
 	form.verify({
 		name : function(value) {
 			if (value.length < 2) {
@@ -71,6 +72,7 @@ layui.use(['form','laydate','upload'],function(){
 			}
 		}
 	});
+	//添加
 	form.on("submit(sub)",function(data){
 		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 		console.log(data.field);
@@ -92,6 +94,7 @@ layui.use(['form','laydate','upload'],function(){
 			}
 		});
 	});
+	//通过一级分分类监听遍历出二级分类
 	form.on("select(categories)",function(data){
 		var id = data.value;
 		if (id == null || id =="") {
@@ -117,6 +120,7 @@ layui.use(['form','laydate','upload'],function(){
 			}
 		});
 	});
+	//时间加载
 	laydate.render({
 	    elem: '#launcTime',
 	    min : '2017-01-01 23:59:59',
