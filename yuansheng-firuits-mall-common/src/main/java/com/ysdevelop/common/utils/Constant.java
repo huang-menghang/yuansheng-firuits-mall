@@ -1,6 +1,7 @@
 package com.ysdevelop.common.utils;
 
 public class Constant {
+	public static final int DEFAULT_INTEGER_ZERO = 0;
 	public static String MOBILE_MSG = "randomNumber";
 	public static String TOKEN_NAME = "token";
 	public static String IMAGE_PATH = "F:\\firuits-demo\\firuits-demo-admin\\src\\main\\webapp\\static\\images\\scroll";

@@ -82,7 +82,7 @@ CREATE TABLE `t_ys_firuits_brand` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #    商品列表
-DROP TABLE IF EXISTS `t_ys_firuits_brand`;
+DROP TABLE IF EXISTS `t_ys_firuits_goods`;
 CREATE TABLE `t_ys_firuits_goods` (
   `id` int(16) NOT NULL AUTO_INCREMENT COMMENT '产品id',
   `name` varchar(64) DEFAULT NULL COMMENT '分类名称',
@@ -104,3 +104,31 @@ CREATE TABLE `t_ys_firuits_goods` (
   `categoryId` int(16) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#    系统日志
+DROP TABLE IF EXISTS `t_ys_firuits_systemaccesslog`;
+CREATE TABLE `t_ys_firuits_systemaccesslog` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `location` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL,
+  `logger` varchar(255) NOT NULL,
+  `level` varchar(20) NOT NULL,
+  `message` varchar(2000) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+#    错误日志
+DROP TABLE IF EXISTS `t_ys_systemerrorlog`;
+CREATE TABLE `t_ys_systemerrorlog` (
+  `id` int(32) NOT NULL AUTO_INCREMENT,
+  `ip` varchar(32) NOT NULL,
+  `osAndbroswer` varchar(256) NOT NULL,
+  `requestUrl` varchar(64) NOT NULL,
+  `requestMethod` varchar(16) NOT NULL,
+  `requestParmater` varchar(1024) NOT NULL,
+  `exceptionMessage` varchar(1024) NOT NULL,
+  `createTime` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updateTime` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

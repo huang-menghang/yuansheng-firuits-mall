@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysdevelop.admin.mapper.ErrorLogsDao">
+   <select id="countByQueryMap" resultType="java.lang.Integer">
+   SELECT
+   count(l.id)
+   FROM t_ys_systemerrorlog as l
+   WHERE 1=1
+   <if test="queryMap.ip != null and queryMap.ip != 'null' and queryMap.ip != '' ">
+   and
+   l.ip like CONCAT('%',#{queryMap.ip},'%')
+   </if>
+   <if test="queryMap.requestUrl != null and queryMap.requestUrl != 'null' and queryMap.requestUrl != '' ">
+   and
+   l.requestUrl like CONCAT('%',#{queryMap.requestUrl},'%')
+   </if>
+   <if test="queryMap.requestMethod != null and queryMap.requestMethod != 'null' and queryMap.requestMethod != '' ">
+   and
+   l.requestMethod like CONCAT('%',#{queryMap.requestMethod},'%')
+   </if>
+   <if test="queryMap.requestParmater != null and queryMap.requestParmater != 'null' and queryMap.requestParmater != '' ">
+   and
+   l.requestParmater like CONCAT('%',#{queryMap.requestParmater},'%')
+   </if>
+   <if test="queryMap.startTime != null and queryMap.startTime !=  'null'   and queryMap.startTime != ''   ">
+   and  <![CDATA[  l.createTime  >= #{queryMap.startTime} ]]>
+   </if>
+   <if test="queryMap.endTime != null and queryMap.endTime !=  'null'   and queryMap.endTime != ''   ">
+   and  <![CDATA[  l.createTime  <= #{queryMap.endTime} ]]>
+   </if>
+   </select>
+   
+   <select id="paginationByQueryMap" resultType="com.ysdevelop.admin.entity.ErrorLogsMember">
+   SELECT
+   l.id,
+   l.ip,
+   l.osAndbroswer,
+   l.requestUrl,
+   l.requestMethod,
+   l.requestParmater,
+   l.exceptionMessage,
+   l.createTime,
+   l.updateTime
+   FROM t_ys_systemerrorlog as l
+   WHERE 1=1
+   <if test="queryMap.ip != null and queryMap.ip != 'null' and queryMap.ip != '' ">
+   and
+   l.ip like CONCAT('%',#{queryMap.ip},'%')
+   </if>
+   <if test="queryMap.requestUrl != null and queryMap.requestUrl != 'null' and queryMap.requestUrl != '' ">
+   and
+   l.requestUrl like CONCAT('%',#{queryMap.level},'%')
+   </if>
+   <if test="queryMap.requestMethod != null and queryMap.requestMethod != 'null' and queryMap.requestMethod != '' ">
+   and
+   l.requestMethod like CONCAT('%',#{queryMap.requestMethod},'%')
+   </if>
+   <if test="queryMap.requestParmater != null and queryMap.requestParmater != 'null' and queryMap.requestParmater != '' ">
+   and
+   l.requestParmater like CONCAT('%',#{queryMap.requestParmater},'%')
+   </if>
+   <if test="queryMap.startTime != null and queryMap.startTime !=  'null'   and queryMap.startTime != ''   ">
+   and  <![CDATA[  l.createTime  >= #{queryMap.startTime} ]]>
+   </if>
+   <if test="queryMap.endTime != null and queryMap.endTime !=  'null'   and queryMap.endTime != ''   ">
+   and  <![CDATA[  l.createTime  <= #{queryMap.endTime} ]]>
+   </if>
+   </select>
+   
+   <delete id="deleteBatchByIds">
+   delete from t_ys_systemerrorlog
+   where id in
+   <foreach collection="list" item="id" separator="," open="(" close=")" index="">
+   #{id}
+   </foreach>
+   </delete>
+   
+   <select id="getInfoById" resultType="com.ysdevelop.admin.entity.ErrorLogsMember">
+	  SELECT
+	  l.ip,
+	  l.osAndbroswer,
+	  l.requestUrl,
+	  l.requestMethod,
+	  l.requestParmater,
+	  l.exceptionMessage,
+	  l.createTime,
+	  l.updateTime
+	  FROM t_ys_systemerrorlog as l
+	  where l.id = #{id}
+	</select>
+</mapper>
