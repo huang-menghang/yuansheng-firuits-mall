@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysdevelop.admin.mapper.CategoryListDao">
+   
+   <select id="list" resultType="com.ysdevelop.admin.entity.CategoryListImage">
+        SELECT
+			`id`,
+			`name`,
+			`imageUrl`,
+			`remark`,
+			`sort`,
+			`status`,
+			`description`,
+			`parentId`,
+			`level`,
+			`createTime`,
+			`updateTime`
+		FROM
+			t_ys_firuits_category
+		where 1=1
+		<if test="queryMap.id != null and queryMap.id !='' and queryMap.id !='null'">
+		   and 
+		       id = #{queryMap.id}
+		</if>
+		<if test="queryMap.name != null and queryMap.name != '' and queryMap.name != 'null'">
+		   and 
+		       name = #{queryMap.name}
+		</if>
+		<if test="queryMap.level != null and queryMap.level != '' and queryMap.level != 'null'">
+		   and 
+		       level = #{queryMap.level}
+		</if>
+		<if test="queryMap.description != null and queryMap.description != '' and queryMap.description != 'null'">
+		   and 
+		       description like CONCAT('%',#{queryMap.description},'%')
+		</if>
+	   <if test="queryMap.startTime != null and queryMap.startTime != 'null'  and queryMap.startTime != '' ">
+         and  <![CDATA[  createTime >= #{queryMap.startTime} ]]>
+       </if>
+       <if test="queryMap.endTime != null and queryMap.endTime != 'null'  and queryMap.endTime != '' ">
+         and  <![CDATA[  createTime <= #{queryMap.endTime} ]]>
+       </if>
+       order by `sort` asc 
+       limit #{pagination.start},#{pagination.pageSize}
+   </select>
+   
+   <select id="queryCount" parameterType="java.util.Map" resultType="java.lang.Integer">         
+         select count(`id`)
+         from t_ys_firuits_category
+         where 1=1
+		<if test="queryMap.id != null and queryMap.id != '' and queryMap.id != 'null'">
+		   and 
+		       id = #{queryMap.id}
+		</if>
+		<if test="queryMap.name != null and queryMap.name != '' and queryMap.name != 'null'">
+		   and 
+		       name = #{queryMap.name}
+		</if>
+		<if test="queryMap.level != null and queryMap.level != '' and queryMap.level != 'null'">
+		   and 
+		       level = #{queryMap.level}
+		</if>
+		<if test="queryMap.description != null and queryMap.description != '' and queryMap.description != 'null'">
+		   and 
+		       description like CONCAT('%',#{queryMap.description},'%')
+		</if>
+	   <if test="queryMap.startTime != null and queryMap.startTime != 'null'  and queryMap.startTime != '' ">
+         and  <![CDATA[  createTime >= #{queryMap.startTime} ]]>
+       </if>
+       <if test="queryMap.endTime != null and queryMap.endTime != 'null'  and queryMap.endTime != '' ">
+         and  <![CDATA[  createTime <= #{queryMap.endTime} ]]>
+       </if>  
+   </select>
+   
+   <update id="editStatusById" parameterType="java.lang.Long">
+        
+        update t_ys_firuits_category
+        set status = case
+        when status = 0 then 1
+        when status = 1 then 0
+        else status end
+        where 
+           id = #{id}   
+   </update>
+   
+   <delete id="deleteBatchByids">
+       delete from t_ys_firuits_category
+       where id in 
+       <foreach collection="list" item="id" separator="," open="(" close=")" index="">
+			#{id}
+	   </foreach> 
+   </delete>
+   
+   <select id="getCategoryById" resultType="com.ysdevelop.admin.entity.CategoryListImage">
+       select
+             `name`,
+			`imageUrl`,
+			`remark`,
+			`sort`,
+			`status`,
+			`description`,
+			`parentId`,
+			`level`,
+			`createTime`
+			
+		from 
+		     t_ys_firuits_category
+		where 
+		      id = #{id}
+   </select>
+   
+   <update id="editCategoryByMap" parameterType="java.util.Map">
+        update t_ys_firuits_category
+       <set>
+        <if test="editMap.name != null and editMap.name != 'null' and editMap.name !='' ">
+	          
+	            name = #{editMap.name}, 
+	                   
+        </if>
+      
+        <if test="editMap.imageUrl !=null and editMap.imageUrl != 'null' and editMap.imageUrl !='' ">
+	       
+	            imageUrl = #{editMap.imageUrl},  
+	              
+        </if>
+        <if test="editMap.sort !=null and editMap.sort != 'null' and editMap.sort !='' " >
+	        
+	            sort = #{editMap.sort},
+	                  
+        </if>
+        <if test="editMap.status !=null and editMap.status != 'null' and editMap.status !='' " >
+	       
+	            status = #{editMap.status}, 
+	                 
+        </if>
+        <if test="editMap.description !=null and editMap.description != 'null' and editMap.description != 'null' and editMap.description != ''" >
+	        
+	            description = #{editMap.description},
+	                    
+        </if>
+        <if test="editMap.createTime !=null and editMap.createTime != 'null' and editMap.createTime != '' " >
+	        
+	            createTime= #{editMap.createTime},	         	         
+        </if>
+               updateTime = now()
+        </set> 
+        where id = #{editMap.id}      
+   </update>
+   
+   <insert id="save" parameterType="com.ysdevelop.admin.entity.CategoryListImage">
+        insert into t_ys_firuits_category
+	        (`name`,`imageUrl`,`level`,`parentId`,`sort`,`status`,`description`,`createTime`)
+		value(#{name},#{imageUrl},#{level},#{parentId},#{sort},#{status},#{description},now())		
+   </insert>
+
+</mapper>

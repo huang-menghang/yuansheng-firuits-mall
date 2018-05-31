@@ -3,7 +3,9 @@ package com.ysdevelop.common.utils;
 public class Constant {
 	public static String MOBILE_MSG = "randomNumber";
 	public static String TOKEN_NAME = "token";
-
+	public static String IMAGE_PATH = "F:\\firuits-demo\\firuits-demo-admin\\src\\main\\webapp\\static\\images\\scroll";
+	public static String IMAGE_URL = "static\\images\\scroll";
+	
 	public static Integer DEFALUT_INTEGER_ZERO = 0;
 
 	public static Integer DEFALUT_INTEGER_ONE = 1;

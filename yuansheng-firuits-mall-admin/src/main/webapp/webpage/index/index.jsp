@@ -54,7 +54,7 @@
                     <a href="javascript:;"><i class="layui-icon">&#xe620;</i>商品管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" href-url="<%=basePath %>brand"><i class="layui-icon">&#xe621;</i>品牌列表</a></dd>
-                        <dd><a href="javascript:;" href-url="demo/form.html"><i class="layui-icon">&#xe621;</i>分类列表</a></dd>
+                        <dd><a href="javascript:;" href-url="<%=basePath %>categoryList/index"><i class="layui-icon">&#xe621;</i>分类列表</a></dd>
                         <dd><a href="javascript:;" href-url="<%=basePath %>goods"><i class="layui-icon">&#xe621;</i>商品列表</a></dd>
                         <dd><a href="javascript:;" href-url="demo/table.html"><i class="layui-icon">&#xe621;</i>优惠劵列表</a></dd>
                     </dl>
@@ -80,7 +80,7 @@
                  <li class="layui-nav-item "> 
                     <a href="javascript:;"><i class="layui-icon">&#xe634;</i>轮播图管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe621;</i>首页轮播图列表</a></dd>
+                        <dd><a href="javascript:;" href-url="<%=basePath %>scroll/index"><i class="layui-icon">&#xe621;</i>首页轮播图列表</a></dd>
                     </dl>
                 </li>
                   <li class="layui-nav-item "> 
