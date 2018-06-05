@@ -119,8 +119,8 @@ CREATE TABLE `t_ys_firuits_systemaccesslog` (
 
 
 #    错误日志
-DROP TABLE IF EXISTS `t_ys_systemerrorlog`;
-CREATE TABLE `t_ys_systemerrorlog` (
+DROP TABLE IF EXISTS `t_ys_firuits_systemerrorlog`;
+CREATE TABLE `t_ys_firuits_systemerrorlog` (
   `id` int(32) NOT NULL AUTO_INCREMENT,
   `ip` varchar(32) NOT NULL,
   `osAndbroswer` varchar(256) NOT NULL,

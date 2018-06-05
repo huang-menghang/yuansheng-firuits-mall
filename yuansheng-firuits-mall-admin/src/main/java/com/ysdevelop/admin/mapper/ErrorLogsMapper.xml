@@ -4,7 +4,7 @@
    <select id="countByQueryMap" resultType="java.lang.Integer">
    SELECT
    count(l.id)
-   FROM t_ys_systemerrorlog as l
+   FROM t_ys_firuits_systemerrorlog as l
    WHERE 1=1
    <if test="queryMap.ip != null and queryMap.ip != 'null' and queryMap.ip != '' ">
    and
@@ -41,7 +41,7 @@
    l.exceptionMessage,
    l.createTime,
    l.updateTime
-   FROM t_ys_systemerrorlog as l
+   FROM t_ys_firuits_systemerrorlog as l
    WHERE 1=1
    <if test="queryMap.ip != null and queryMap.ip != 'null' and queryMap.ip != '' ">
    and
@@ -68,7 +68,7 @@
    </select>
    
    <delete id="deleteBatchByIds">
-   delete from t_ys_systemerrorlog
+   delete from t_ys_firuits_systemerrorlog
    where id in
    <foreach collection="list" item="id" separator="," open="(" close=")" index="">
    #{id}
@@ -85,7 +85,7 @@
 	  l.exceptionMessage,
 	  l.createTime,
 	  l.updateTime
-	  FROM t_ys_systemerrorlog as l
+	  FROM t_ys_firuits_systemerrorlog as l
 	  where l.id = #{id}
 	</select>
 </mapper>
