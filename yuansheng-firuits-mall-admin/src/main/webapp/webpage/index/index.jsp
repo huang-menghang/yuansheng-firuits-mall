@@ -94,6 +94,7 @@
                  <li class="layui-nav-item "> 
                     <a href="javascript:;"><i class="layui-icon">&#xe620;</i>系统管理</a>
                     <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" href-url="<%=basePath %>actionlog/actionlog"><i class="layui-icon">&#xe621;</i>业务日志列表</a></dd>
                         <dd><a href="javascript:;" href-url="<%=basePath %>logs"><i class="layui-icon">&#xe621;</i>系统日志列表</a></dd>
                         <dd><a href="javascript:;" href-url="<%=basePath %>errorlogs"><i class="layui-icon">&#xe621;</i>异常日志列表</a></dd>
                     </dl>
