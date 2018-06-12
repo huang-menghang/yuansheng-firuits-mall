@@ -5,6 +5,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -117,6 +119,25 @@ public class HttpUtils {
 
 		return os + " --- " + browser;
 
+	}
+	
+	public static String getRequestParamters(HttpServletRequest request) {
+		String paramter = "";
+		Map<String, String[]> paramterMap = request.getParameterMap();
+		Set<Entry<String, String[]>> entrySet = paramterMap.entrySet();
+		for (Entry<String, String[]> entry : entrySet) {
+			String[] values = entry.getValue();
+			String param ="";
+			for (String value : values) {
+				if (param.equals("")) {
+					param = value;
+				}else {
+					param =param+","+ value;
+				}
+			}
+			paramter += (entry.getKey()+":"+param+";");
+		}
+		return paramter;
 	}
 
 	public static String getRealPath(HttpServletRequest request) {

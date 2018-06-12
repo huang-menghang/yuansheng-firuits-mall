@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysdevelop.admin.mapper.ActionLogDao">
+<insert id="save">
+insert into t_ys_firuits_actionLog(user,requstUrl,result,requestParams,requestControllerMethod,exception,createTime,ip,osAndBrowser,requestMethod)
+values(#{log.user},#{log.requstUrl},#{log.result},#{log.requestParams},#{log.requestControllerMethod},#{log.exception},#{log.createTime},#{log.ip},#{log.osAndBrowser},#{log.requestMethod})
+</insert>
+
+<select id="countActionLog" resultType="java.lang.Integer">
+select count(`id`)
+from t_ys_firuits_actionLog
+</select>
+
+<select id="paginationLogs" resultType="com.ysdevelop.admin.entity.ActionLog">
+select id,user,requstUrl,result,requestParams,requestControllerMethod,exception,ip,osAndBrowser,requestMethod
+ from t_ys_firuits_actionLog
+ <trim prefix="where" suffixOverrides="and"> 
+ <if test="queryMap.requestUrl != null and queryMap.requestUrl != ''">
+ requstUrl=#{queryMap.requstUrl} and
+ </if>
+ <if test="queryMap.user != null and queryMap.user != ''">
+ user=#{queryMap.user} and
+ </if>
+ <if test="queryMap.ip != null and queryMap.ip != ''">
+ ip=#{queryMap.ip} and
+ </if>
+ <if test="queryMap.startTime != null and queryMap.startTime != ''">
+ createTime >= #{queryMap.startTime} and 
+ </if>
+ <if test="queryMap.endTime != null and queryMap.endTime != ''">
+ createTime >= #{queryMap.endTime} and
+ </if>
+ </trim>
+ limit #{pagination.pageNum},#{pagination.pageSize}
+</select>
+<select id="getLogById" resultType="com.ysdevelop.admin.entity.ActionLog" >
+select id,user,requstUrl,result,requestParams,requestControllerMethod,exception,ip,osAndBrowser,requestMethod,createTime
+from t_ys_firuits_actionLog
+where id=#{id}
+</select>
+</mapper>
