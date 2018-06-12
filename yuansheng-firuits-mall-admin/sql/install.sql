@@ -132,3 +132,20 @@ CREATE TABLE `t_ys_firuits_systemerrorlog` (
   `updateTime` timestamp NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+#    业务日志
+CREATE TABLE `t_ys_firuits_actionlog` (
+  `user` varchar(16) DEFAULT NULL,
+  `id` int(16) NOT NULL AUTO_INCREMENT,
+  `requstUrl` varchar(64) DEFAULT NULL,
+  `result` varchar(512) DEFAULT NULL,
+  `requestParams` varchar(256) DEFAULT NULL,
+  `exception` varchar(128) DEFAULT NULL,
+  `updateTime` datetime DEFAULT NULL,
+  `createTime` timestamp NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `ip` varchar(16) DEFAULT NULL,
+  `osAndBrowser` varchar(32) DEFAULT NULL,
+  `requestMethod` varchar(8) DEFAULT NULL,
+  `requestControllerMethod` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
